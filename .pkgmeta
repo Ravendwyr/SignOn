@@ -1,5 +1,5 @@
 package-as: Prat-3.0_SignOn
 
 required-dependencies:
-    - Prat-3-0
+    - prat-3-0
 
