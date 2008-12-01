@@ -1,0 +1,14 @@
+## Interface: 20400
+## Title: Prat |r[|cffeda55fSignon|r]
+## Author: Chiper
+## Version: 1.0
+## Notes: Adds extra player information to guild and friend signon/signoff messages
+## eMail: wow@chipersoft.com
+## X-Email: wow@chipersoft.com
+## X-Category: Chat/Communication
+
+## LoadOnDemand: 0
+## DefaultState: Enabled
+## RequiredDeps: Prat
+
+Prat_Signon.lua
