@@ -118,7 +118,7 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	if message.MESSAGE:find("online") then -- user came online
 		name, online = message.PLAYER, true
 
-	elseif message.MESSAGE:("offline") then -- user went offline
+	elseif message.MESSAGE:find("offline") then -- user went offline
 		name, online = message.MESSAGE:match("(%a+)"), false
 
 	else return end
