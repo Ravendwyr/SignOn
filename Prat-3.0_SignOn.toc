@@ -1,12 +1,13 @@
 ## Interface: 30000
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fSign On|r]
 ## Author: Ethan Centaurai
-## Version: 2.0
-## Notes: Adds extra player information to guild and friend signon/signoff messages
+## Version: @project-version@
+## Notes: Allows you to customise guild and friend signon/signoff messages (originally written by CipherSoft)
 ## X-Email: ethan.centaurai@live.co.uk
 ## X-Category: Chat/Communication
 ## LoadOnDemand: 0
 ## DefaultState: Enabled
 ## Dependencies: Prat-3.0
-## X-Curse-Packaged-Version: r28-beta
+
 Core.lua
+

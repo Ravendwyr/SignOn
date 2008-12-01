@@ -1,6 +1,6 @@
 ﻿--[[
 Name: Prat SignOn
-Author: Ethan Centaurai
+Author: Ethan Centaurai (originally written by CipherSoft)
 Description: Adds extra player information to guild and friend signon/signoff messages
 Dependencies: Prat-3.0
 ]]--
@@ -86,13 +86,15 @@ function SignOn:GetUserData(playerName)
 	local u
 
 	-- Search guild
-	for i=1, GetNumGuildMembers(true) do
-		u = { type = "GUILD" }
-		u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, u.status = GetGuildRosterInfo(i)
+	if IsInGuild() then
+		for i=1, GetNumGuildMembers(true) do
+			u = { type = "GUILD" }
+			u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, u.status = GetGuildRosterInfo(i)
 
-		if (string.find(playerName, u.name)) then
-			u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
-			return u
+			if playerName:find(u.name) then
+				u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
+				return u
+			end
 		end
 	end
 
@@ -101,7 +103,7 @@ function SignOn:GetUserData(playerName)
 		u = { type = "FRIEND" }
 		u.name, u.level, u.class, u.zone, _, u.status, u.note = GetFriendInfo(i)
 
-		if (string.find(playerName, u.name)) then
+		if playerName:find(u.name) then
 			u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
 			return u
 		end
@@ -113,10 +115,10 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 
 	local name, online
 
-	if string.find(message.MESSAGE, "online") then -- user came online
+	if message.MESSAGE:find("online") then -- user came online
 		name, online = message.PLAYER, true
 
-	elseif string.find(message.MESSAGE, "offline") then -- user went offline
+	elseif message.MESSAGE:("offline") then -- user went offline
 		name, online = message.MESSAGE:match("(%a+)"), false
 
 	else return end
@@ -146,7 +148,7 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	msg = msg:gsub("&name", data.name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
 	-- nil out all message data except actual content.
-	-- we have to do this otherwise the players name will appear twice in the message, and any alts will appear at the beginning.
+	-- we have to do this otherwise the players name will appear twice in the message.
 	-- it doesn't happen for signoff messages; what would be the point of a hyperlink to someone who just left? :)
 	message.PLAYER = ""
 	message.PLAYERLINK = ""
@@ -159,3 +161,4 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	message.Ff = ""
 	message.MESSAGE = msg
 end
+
