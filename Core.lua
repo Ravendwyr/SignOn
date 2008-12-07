@@ -83,15 +83,17 @@ end
 
 
 function SignOn:GetUserData(playerName)
-	local u
+	local u, name
+
+	playerName = playerName:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "")
 
 	-- Search guild
 	if IsInGuild() then
 		for i=1, GetNumGuildMembers(true) do
 			u = { type = "GUILD" }
-			u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, u.status = GetGuildRosterInfo(i)
+			u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = GetGuildRosterInfo(i)
 
-			if playerName:find(u.name) then
+			if playerName == u.name then
 				u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
 				return u
 			end
@@ -101,9 +103,9 @@ function SignOn:GetUserData(playerName)
 	-- Then search friends
 	for i=1, GetNumFriends() do
 		u = { type = "FRIEND" }
-		u.name, u.level, u.class, u.zone, _, u.status, u.note = GetFriendInfo(i)
+		u.name, u.level, u.class, u.zone, _, _, u.note = GetFriendInfo(i)
 
-		if playerName:find(u.name) then
+		if playerName == u.name then
 			u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
 			return u
 		end
