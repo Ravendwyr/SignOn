@@ -31,6 +31,7 @@ L:AddLocale("enUS", {
 
 
 local SignOn = Prat:NewModule(PRAT_MODULE)
+local db
 
 Prat:SetModuleDefaults(SignOn.name, {
 	profile = {
@@ -84,6 +85,7 @@ Prat:SetModuleOptions(SignOn, {
 
 function SignOn:OnModuleEnable()
 	Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
+	db = self.db.profile
 end
 
 function SignOn:OnModuleDisable()
@@ -143,19 +145,19 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 
 	if data.type == "GUILD" then
 		if online then
-			msg = self.db.profile.guildOn
+			msg = db.guildOn
 		else
-			msg = self.db.profile.guildOff
+			msg = db.guildOff
 		end
 	else
 		if online then
-			msg = self.db.profile.friendOn
+			msg = db.friendOn
 		else
-			msg = self.db.profile.friendOff
+			msg = db.friendOff
 		end
 	end
 
-	if self.db.profile.colourNames then
+	if db.colourNames then
 		data.name = CLR:Player(data.name, data.name, data.class)
 	end
 
