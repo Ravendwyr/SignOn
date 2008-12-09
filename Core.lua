@@ -23,6 +23,9 @@ L:AddLocale("enUS", {
 	["Friend Signoff String"] = true,
 	["Format string for when friends log off"] = true,
 
+	["Colour Names"] = true,
+	["Recolour player names in the message useing the colouring settings in the PlayerName module."] = true,
+
 	["String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note"] = true,
 })
 
@@ -69,6 +72,11 @@ Prat:SetModuleOptions(SignOn, {
 			type = "input", order = 4,
 			usage = L["String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note"],
 		},
+		colourNames = {
+			name = L["Colour Names"],
+			desc = L["Recolour player names in the message useing the colouring settings in the PlayerName module."],
+			type = "toggle", order = 5,
+		},
 	},
 })
 
@@ -83,9 +91,7 @@ end
 
 
 function SignOn:GetUserData(playerName)
-	local u, name
-
-	playerName = playerName:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "")
+	local u
 
 	-- Search guild
 	if IsInGuild() then
@@ -94,7 +100,6 @@ function SignOn:GetUserData(playerName)
 			u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = GetGuildRosterInfo(i)
 
 			if playerName == u.name then
-				u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
 				return u
 			end
 		end
@@ -106,11 +111,13 @@ function SignOn:GetUserData(playerName)
 		u.name, u.level, u.class, u.zone, _, _, u.note = GetFriendInfo(i)
 
 		if playerName == u.name then
-			u.name = "|Hplayer:"..u.name.."|h"..u.name.."|h"
 			return u
 		end
 	end
 end
+
+
+local CLR = Prat.CLR
 
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	if event ~= "CHAT_MSG_SYSTEM" then return end -- only process system messages
@@ -125,11 +132,12 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 
 	else return end
 
+	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out colour codes, we'll add them back later
+
 	-- have captured player name, and broken out of the function if this isnt the event we want.
 	local data = self:GetUserData(name)
 	if not data then return end -- couldn't get information, don't alter the text.
 
-	-- safe values are: name, level, class, zone, note, and rank
 	local msg
 
 	if data.type == "GUILD" then
@@ -145,6 +153,12 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 			msg = self.db.profile.friendOff
 		end
 	end
+
+	if self.db.profile.colourNames then
+		data.name = CLR:Player(data.name, data.name, data.class)
+	end
+
+	data.name = "|Hplayer:"..name.."|h"..data.name.."|h" -- name is uncoloured, data.name is potentially coloured. coloured names kill the link if used between |Hplayer and the first |h
 
 	-- choo choo! here comes the gsub train!
 	msg = msg:gsub("&name", data.name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
