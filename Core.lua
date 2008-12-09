@@ -35,6 +35,7 @@ local SignOn = Prat:NewModule(PRAT_MODULE)
 Prat:SetModuleDefaults(SignOn.name, {
 	profile = {
 		on = true,
+		colourNames = false,
 
 		guildOn = "<Guild> &rank &name [&level &class] has come online in &zone (Note: &note)",
 		guildOff = "<Guild> &rank &name [&level &class] has logged off (Note: &note)",
