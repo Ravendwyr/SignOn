@@ -1,0 +1,22 @@
+## Interface: 30000
+## Title: Sign On
+## Version: @project-version@
+## Notes: Allows you to customise guild and friend signon/signoff messages (originally written by CipherSoft)
+## Author: Ethan Centaurai
+## X-eMail: ethan.centaurai@live.co.uk
+## X-Donate: PayPal:ethan.centaurai@live.co.uk
+## X-Category: Chat/Communication
+## SavedVariables: SignOnDB
+## OptionalDeps: Ace3, Prat-3.0
+
+#@no-lib-strip@
+Lib\LibStub\LibStub.lua
+Lib\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Lib\AceAddon-3.0\AceAddon-3.0.lua
+Lib\AceDB-3.0\AceDB-3.0.lua
+Lib\AceGUI-3.0\AceGUI-3.0.xml
+Lib\AceConfig-3.0\AceConfig-3.0.xml
+#@end-no-lib-strip@
+
+Core.lua
+
