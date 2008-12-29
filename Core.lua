@@ -66,6 +66,11 @@ local function signOn(message, player)
 
 	data.name = "|Hplayer:"..name.."|h"..data.name.."|h" -- name is uncoloured text, data.name is coloured text. coloured names kill the link if used between '|Hplayer' and the first '|h'
 
+	if db.colourStatus then
+		msg = msg:gsub("[Oo][Nn][Ll][Ii][Nn][Ee]", "|cff00ff00%1|r"):gsub("[Oo][Ff][Ff][Ll][Ii][Nn][Ee]", "|cffff0000%1|r")
+		msg = msg:gsub("[Ll][Oo][Gg][Gg][Ee][Dd] [Oo][Nn]", "|cff00ff00%1|r"):gsub("[Ll][Oo][Gg][Gg][Ee][Dd] [Oo][Ff][Ff]", "|cffff0000%1|r")
+	end
+
 	-- choo choo! here comes the gsub train!
 	msg = msg:gsub("&name", data.name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
@@ -74,11 +79,13 @@ end
 
 
 function SignOn:OnEnable()
-	self.db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = { colourNames = false,
+	self.db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
 		guildOn = "<Guild> &rank &name [&level &class] has come online in &zone (Note: &note)",
 		guildOff = "<Guild> &rank &name [&level &class] has logged off (Note: &note)",
 		friendOn = "<Friend> &name [&level &class] has signed on in &zone (Note: &note)",
 		friendOff = "<Friend> &name [&level &class] has logged off (Note: &note)",
+
+		colourNames = false, colourStatus = false,
 	}}, "Default")
 
 	db = self.db.profile
@@ -126,6 +133,11 @@ function SignOn:OnEnable()
 				desc = "Change the colour of player names. Requires Prat-3.0 to be installed.",
 				type = "toggle", order = 5, arg = "colourNames",
 				disabled = function() return not CLR end,
+			},
+			colourStatus = {
+				name = "Colour Online Status",
+				desc = "Change the colour of the keywords |cff00ff00logged on|r, |cffff0000logged off|r, |cff00ff00online|r, and |cffff0000offline|r. Case insensitive.",
+				type = "toggle", order = 6, arg = "colourStatus",
 			},
 		},
 	})
