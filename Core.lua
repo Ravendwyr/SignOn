@@ -2,6 +2,46 @@
 local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
 local db, CLR
 
+-- colouring functions 
+local classColours = {
+	["Death Knight"] = "c41e3a",
+	["Druid"] = "ff7c0a",
+	["Hunter"] = "aad372",
+	["Mage"] = "68ccef",
+	["Paladin"] = "f48cba",
+	["Priest"] = "ffffff",
+	["Rogue"] = "9382c9",
+	["Shaman"] = "2359ff",
+	["Warrior"] = "c69b6d",
+	["Warlock"] = "9382c9",
+}
+
+local function random(text) -- copied from Prat-3.0
+	local hash = 17
+
+	for i=1, text:len() do
+		hash = hash * 37 * text:byte(i)
+	end
+
+	local r = math.floor(math.fmod(hash / 97, 255))
+	local g = math.floor(math.fmod(hash / 17, 255))
+	local b = math.floor(math.fmod(hash / 227, 255))
+
+	if ((r * 299 + g * 587 + b * 114) / 1000) < 105 then
+		r = math.abs(r - 255)
+		g = math.abs(g - 255)
+		b = math.abs(b - 255)
+	end
+
+	return ("|cff%02x%02x%02x%s|r"):format(r, g, b, text)
+end
+
+local function class(text, c)
+	local hex = classColours[c]
+	return "|cff"..hex..text.."|r"
+end
+
+-- core functions
 local function getUserData(playerName)
 	local u
 
@@ -38,7 +78,7 @@ local function signOn(message, player) -- player is supplied by Prat, not by the
 	if not name then if player then name = player
 	else return end end
 
-	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out Prat-3.0 colour codes
+	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out colour codes
 
 	-- have captured player name, and broken out of the function if this isnt the event we want.
 	local data = getUserData(name)
@@ -60,20 +100,35 @@ local function signOn(message, player) -- player is supplied by Prat, not by the
 		end
 	end
 
-	if db.colourNames and CLR then
+--[[	if db.colourNames and CLR then
 		data.name = CLR:Player(data.name, data.name, data.class)
 	end
 
-	data.name = "|Hplayer:"..name.."|h"..data.name.."|h" -- name is uncoloured text, data.name is coloured text. coloured names kill the link if used between '|Hplayer' and the first '|h'
+	name = "|Hplayer:"..name.."|h"..name.."|h" -- name is uncoloured text, data.name is coloured text. coloured names kill the link if used between '|Hplayer' and the first '|h'
 
 	if db.colourStatus then
 		msg = msg:gsub("[Oo][Nn][Ll][Ii][Nn][Ee]", "|cff00ff00%1|r"):gsub("[Oo][Ff][Ff][Ll][Ii][Nn][Ee]", "|cffff0000%1|r")
 		msg = msg:gsub("[Ll][Oo][Gg][Gg][Ee][Dd] [Oo][Nn]", "|cff00ff00%1|r"):gsub("[Ll][Oo][Gg][Gg][Ee][Dd] [Oo][Ff][Ff]", "|cffff0000%1|r")
 	end
-
+]]
 	-- choo choo! here comes the gsub train!
-	msg = msg:gsub("&name", data.name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
+	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
+	-- add in colours
+	msg = msg:gsub("(%w+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
+	msg = msg:gsub("(%w+):random", random)
+	msg = msg:gsub("(%w+):green", "|cff00ff00%1|r")
+	msg = msg:gsub("(%w+):red", "|cffff0000%1|r")
+	msg = msg:gsub("(%w+):blue", "|cff0000ff%1|r")
+	msg = msg:gsub("(%w+):pink", "|cffff00ff%1|r")
+	msg = msg:gsub("(%w+):cyan", "|cff00ffff%1|r")
+	msg = msg:gsub("(%w+):yellow", "|cffffff00%1|r")
+	msg = msg:gsub("(%w+):orange", "|cffff7f00%1|r")
+
+	-- add in player links
+	msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
+
+	print(msg)
 	return false, msg
 end
 
@@ -128,7 +183,7 @@ function SignOn:OnEnable()
 				type = "input", order = 4, arg = "friendOff",
 				usage = "String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note.",
 			},
-			colourNames = {
+--[[			colourNames = {
 				name = "Colour Names",
 				desc = "Change the colour of player names. Requires Prat-3.0 to be installed.",
 				type = "toggle", order = 5, arg = "colourNames",
@@ -139,10 +194,12 @@ function SignOn:OnEnable()
 				desc = "Change the colour of the keywords |cff00ff00logged on|r, |cffff0000logged off|r, |cff00ff00online|r, and |cffff0000offline|r. Case insensitive.",
 				type = "toggle", order = 6, arg = "colourStatus",
 			},
-		},
+]]		},
 	})
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
+
+	signOn("|Hplayer:Fortitude|hFortitude|h has come online.")
 end
 
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
