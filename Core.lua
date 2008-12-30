@@ -1,6 +1,6 @@
 ﻿
 local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
-local db, CLR
+local db
 
 -- colouring functions 
 local classColours = {
@@ -100,17 +100,6 @@ local function signOn(message, player) -- player is supplied by Prat, not by the
 		end
 	end
 
---[[	if db.colourNames and CLR then
-		data.name = CLR:Player(data.name, data.name, data.class)
-	end
-
-	name = "|Hplayer:"..name.."|h"..name.."|h" -- name is uncoloured text, data.name is coloured text. coloured names kill the link if used between '|Hplayer' and the first '|h'
-
-	if db.colourStatus then
-		msg = msg:gsub("[Oo][Nn][Ll][Ii][Nn][Ee]", "|cff00ff00%1|r"):gsub("[Oo][Ff][Ff][Ll][Ii][Nn][Ee]", "|cffff0000%1|r")
-		msg = msg:gsub("[Ll][Oo][Gg][Gg][Ee][Dd] [Oo][Nn]", "|cff00ff00%1|r"):gsub("[Ll][Oo][Gg][Gg][Ee][Dd] [Oo][Ff][Ff]", "|cffff0000%1|r")
-	end
-]]
 	-- choo choo! here comes the gsub train!
 	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
@@ -128,7 +117,6 @@ local function signOn(message, player) -- player is supplied by Prat, not by the
 	-- add in player links
 	msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
 
-	print(msg)
 	return false, msg
 end
 
@@ -139,15 +127,12 @@ function SignOn:OnEnable()
 		guildOff = "<Guild> &rank &name [&level &class] has logged off (Note: &note)",
 		friendOn = "<Friend> &name [&level &class] has signed on in &zone (Note: &note)",
 		friendOff = "<Friend> &name [&level &class] has logged off (Note: &note)",
-
-		colourNames = false, colourStatus = false,
 	}}, "Default")
 
 	db = self.db.profile
 
 	if IsAddOnLoaded("Prat-3.0") then
 		Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
-		CLR = Prat.CLR
 	else
 		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", signOn)
 	end
@@ -183,23 +168,10 @@ function SignOn:OnEnable()
 				type = "input", order = 4, arg = "friendOff",
 				usage = "String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note.",
 			},
---[[			colourNames = {
-				name = "Colour Names",
-				desc = "Change the colour of player names. Requires Prat-3.0 to be installed.",
-				type = "toggle", order = 5, arg = "colourNames",
-				disabled = function() return not CLR end,
-			},
-			colourStatus = {
-				name = "Colour Online Status",
-				desc = "Change the colour of the keywords |cff00ff00logged on|r, |cffff0000logged off|r, |cff00ff00online|r, and |cffff0000offline|r. Case insensitive.",
-				type = "toggle", order = 6, arg = "colourStatus",
-			},
-]]		},
+		},
 	})
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
-
-	signOn("|Hplayer:Fortitude|hFortitude|h has come online.")
 end
 
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
