@@ -123,10 +123,10 @@ end
 
 function SignOn:OnEnable()
 	self.db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
-		guildOn = "<Guild> &rank &name [&level &class] has come online in &zone (Note: &note)",
-		guildOff = "<Guild> &rank &name [&level &class] has logged off (Note: &note)",
-		friendOn = "<Friend> &name [&level &class] has signed on in &zone (Note: &note)",
-		friendOff = "<Friend> &name [&level &class] has logged off (Note: &note)",
+		guildOn = "<Guild> &rank &name:random [&level &class:class] has come:green online:green in &zone (Note: &note)",
+		guildOff = "<Guild> &rank &name:random [&level &class:class] has logged:red off:red (Note: &note)",
+		friendOn = "<Friend> &name:random [&level &class:class] has signed:green on:green in &zone (Note: &note)",
+		friendOff = "<Friend> &name:random [&level &class:class] has logged:red off:red (Note: &note)",
 	}}, "Default")
 
 	db = self.db.profile
