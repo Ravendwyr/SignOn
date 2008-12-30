@@ -24,7 +24,7 @@ local function getUserData(playerName)
 	end
 end
 
-local function signOn(message, player)
+local function signOn(message, player) -- player is supplied by Prat, not by the filter call
 	local name, online
 
 	if message:find("online") then -- user came online
