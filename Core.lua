@@ -176,6 +176,10 @@ function SignOn:OnEnable()
 	})
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
+
+	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
+	_G["SLASH_SIGNON1"] = "/signon"
+	_G["SLASH_SIGNON2"] = "/so"
 end
 
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
