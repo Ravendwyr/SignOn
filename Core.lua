@@ -144,29 +144,33 @@ function SignOn:OnEnable()
 		get = function(key) return db[key.arg] end,
 		set = function(key, value) db[key.arg] = value end,
 		args = {
+			desc = {
+				type = "description", order = 1,
+				name = "Strings can contain tags, colour flags and any other characters.\n"..
+					"Acceptable tags are &name, &level, &class, &zone, &rank, and &note.\n"..
+					"Acceptable colour flags are :random, :class, :green, :red, :blue, :pink, :cyan, :yellow, and :orange.\n"..
+					"For example, &name:class would become "..class(UnitName("player"), UnitClass("player"))..".\n"..
+					"Anything else will be assumed to be part of the message."
+			},
 			guildOn = {
-				name = "Guild Signon String",
+				name = "Guild Log-on Message",
 				desc = "Format string for when guild members sign on",
-				type = "input", order = 1, arg = "guildOn",
-				usage = "String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note.",
+				type = "input", order = 2, arg = "guildOn", width = "full",
 			},
 			guildOff = {
-				name = "Guild Signoff String",
+				name = "Guild Log-off Message",
 				desc = "Format string for when guild members log off",
-				type = "input", order = 2, arg = "guildOff",
-				usage = "String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note.",
+				type = "input", order = 3, arg = "guildOff", width = "full",
 			},
 			friendOn = {
-				name = "Friend Signon String",
+				name = "Friend Log-on Message",
 				desc = "Format string for when friends sign on",
-				type = "input", order = 3, arg = "friendOn",
-				usage = "String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note.",
+				type = "input", order = 4, arg = "friendOn", width = "full",
 			},
 			friendOff = {
-				name = "Friend Signoff String",
+				name = "Friend Log-off Message",
 				desc = "Format string for when friends log off",
-				type = "input", order = 4, arg = "friendOff",
-				usage = "String can contain any characters. Acceptable tags are: &name, &level, &class, &zone, &rank, &note.",
+				type = "input", order = 5, arg = "friendOff", width = "full",
 			},
 		},
 	})
