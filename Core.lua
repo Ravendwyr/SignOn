@@ -108,8 +108,9 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	-- add in data
 	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
-	-- add in player links
-	msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
+	if online then -- add in player links
+		msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
+	end
 
 	return false, msg
 end
