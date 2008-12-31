@@ -68,10 +68,10 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	local name, online
 
 	if message:find("online") then -- user came online
-		name, online = message:match("|Hplayer:(%w+)|h.-|h has come online"), true
+		name, online = message:match("|Hplayer:(.-)|h.-|h has come online"), true
 
 	elseif message:find("offline") then -- user went offline
-		name, online = message:match("(%w+) has gone offline"), false
+		name, online = message:match("(.-) has gone offline"), false
 
 	else return end
 
@@ -94,19 +94,19 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 		else msg = db.friendOff end
 	end
 
-	-- choo choo! here comes the gsub train!
-	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
-
 	-- add in colours
-	msg = msg:gsub("(%w+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
-	msg = msg:gsub("(%w+):random", random)
-	msg = msg:gsub("(%w+):green", "|cff00ff00%1|r")
-	msg = msg:gsub("(%w+):red", "|cffff0000%1|r")
-	msg = msg:gsub("(%w+):blue", "|cff0000ff%1|r")
-	msg = msg:gsub("(%w+):pink", "|cffff00ff%1|r")
-	msg = msg:gsub("(%w+):cyan", "|cff00ffff%1|r")
-	msg = msg:gsub("(%w+):yellow", "|cffffff00%1|r")
-	msg = msg:gsub("(%w+):orange", "|cffff7f00%1|r")
+	msg = msg:gsub("([&%w]%w+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
+	msg = msg:gsub("([&%w]%w+):random", random(name))
+	msg = msg:gsub("([&%w]%w+):green", "|cff00ff00%1|r")
+	msg = msg:gsub("([&%w]%w+):red", "|cffff0000%1|r")
+	msg = msg:gsub("([&%w]%w+):blue", "|cff0000ff%1|r")
+	msg = msg:gsub("([&%w]%w+):pink", "|cffff00ff%1|r")
+	msg = msg:gsub("([&%w]%w+):cyan", "|cff00ffff%1|r")
+	msg = msg:gsub("([&%w]%w+):yellow", "|cffffff00%1|r")
+	msg = msg:gsub("([&%w]%w+):orange", "|cffff7f00%1|r")
+
+	-- add in data
+	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
 	-- add in player links
 	msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
@@ -143,8 +143,9 @@ function SignOn:OnEnable()
 				name = "Strings can contain tags, colour flags and any other characters.\n"..
 					"Acceptable tags are &name, &level, &class, &zone, &rank, and &note.\n"..
 					"Acceptable colour flags are :random, :class, :green, :red, :blue, :pink, :cyan, :yellow, and :orange.\n"..
+					":random follows the same rules as Prat-3.0's 'random' playername colouring setting.\n"..
 					"For example, &name:class would become "..class(UnitName("player"), UnitClass("player"))..".\n"..
-					"Anything else will be assumed to be part of the message."
+					"Anything else will be assumed to be part of the message.",
 			},
 			guildOn = {
 				name = "Guild Log-on Message",
