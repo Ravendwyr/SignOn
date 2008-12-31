@@ -64,7 +64,7 @@ local function getUserData(playerName)
 	end
 end
 
-local function signOn(message, player) -- player is supplied by Prat, not by the filter call
+local function signOn(message, player) -- 'player' is supplied by Prat, not by the filter call
 	local name, online
 
 	if message:find("online") then -- user came online
@@ -87,17 +87,11 @@ local function signOn(message, player) -- player is supplied by Prat, not by the
 	local msg
 
 	if data.type == "GUILD" then
-		if online then
-			msg = db.guildOn
-		else
-			msg = db.guildOff
-		end
+		if online then msg = db.guildOn
+		else msg = db.guildOff end
 	else
-		if online then
-			msg = db.friendOn
-		else
-			msg = db.friendOff
-		end
+		if online then msg = db.friendOn
+		else msg = db.friendOff end
 	end
 
 	-- choo choo! here comes the gsub train!
@@ -185,11 +179,13 @@ end
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	if event ~= "CHAT_MSG_SYSTEM" then return end
 
-	_, message.MESSAGE = signOn(message.MESSAGE, message.PLAYER)
+	local _, msg = signOn(message.MESSAGE, message.PLAYER)
+	if not msg then return end
 
 	-- nil out all message data except actual content.
 	-- we have to do this otherwise the players name will appear twice in the message.
 	-- it doesn't happen for signoff messages; what would be the point of a hyperlink to someone who just left? :)
+	message.MESSAGE = msg
 	message.PLAYER = ""
 	message.PLAYERLINK = ""
 	message.PLAYERLINKDATA = ""
