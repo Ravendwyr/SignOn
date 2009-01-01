@@ -1,19 +1,20 @@
-﻿
+﻿local L = LibStub("AceLocale-3.0"):GetLocale("SignOn", false)
+
 local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
 local db
 
 -- colouring functions 
 local classColours = {
-	["Death Knight"] = "c41e3a",
-	["Druid"] = "ff7c0a",
-	["Hunter"] = "aad372",
-	["Mage"] = "68ccef",
-	["Paladin"] = "f48cba",
-	["Priest"] = "ffffff",
-	["Rogue"] = "9382c9",
-	["Shaman"] = "2359ff",
-	["Warrior"] = "c69b6d",
-	["Warlock"] = "9382c9",
+	[L["Death Knight"]] = "c41e3a",
+	[L["Druid"]] = "ff7c0a",
+	[L["Hunter"]] = "aad372",
+	[L["Mage"]] = "68ccef",
+	[L["Paladin"]] = "f48cba",
+	[L["Priest"]] = "ffffff",
+	[L["Rogue"]] = "9382c9",
+	[L["Shaman"]] = "2359ff",
+	[L["Warrior"]] = "c69b6d",
+	[L["Warlock"]] = "9382c9",
 }
 
 local function random(text) -- copied from Prat-3.0
@@ -67,11 +68,11 @@ end
 local function signOn(message, player) -- 'player' is supplied by Prat, not by the filter call
 	local name, online
 
-	if message:find("online") then -- user came online
-		name, online = message:match("|Hplayer:(.-)|h.-|h has come online"), true
+	if message:find(L["has come online"]) then -- user came online
+		name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
 
-	elseif message:find("offline") then -- user went offline
-		name, online = message:match("(.-) has gone offline"), false
+	elseif message:find(L["has gone offline"]) then -- user went offline
+		name, online = message:match(L["(.-) has gone offline"]), false
 
 	else return end
 
@@ -118,10 +119,10 @@ end
 
 function SignOn:OnEnable()
 	self.db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
-		guildOn = "<Guild> &rank &name:random [&level &class:class] has come:green online:green in &zone (Note: &note)",
-		guildOff = "<Guild> &rank &name:random [&level &class:class] has logged:red off:red (Note: &note)",
-		friendOn = "<Friend> &name:random [&level &class:class] has signed:green on:green in &zone (Note: &note)",
-		friendOff = "<Friend> &name:random [&level &class:class] has logged:red off:red (Note: &note)",
+		guildOn = L["<Guild> &rank &name:random [&level &class:class] has come:green online:green in &zone (Note: &note)"],
+		guildOff = L["<Guild> &rank &name:random [&level &class:class] has logged:red off:red (Note: &note)"],
+		friendOn = L["<Friend> &name:random [&level &class:class] has signed:green on:green in &zone (Note: &note)"],
+		friendOff = L["<Friend> &name:random [&level &class:class] has logged:red off:red (Note: &note)"],
 	}}, "Default")
 
 	db = self.db.profile
@@ -133,39 +134,32 @@ function SignOn:OnEnable()
 	end
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("SignOn", {
-		name = "Sign On",
-		desc = "Allows you to customise guild and friend signon/signoff messages.",
-		type = "group",
+		name = "Sign On", type = "group",
 		get = function(key) return db[key.arg] end,
 		set = function(key, value) db[key.arg] = value end,
 		args = {
 			desc = {
 				type = "description", order = 1,
-				name = "Strings can contain tags, colour flags and any other characters.\n"..
-					"Acceptable tags are &name, &level, &class, &zone, &rank, and &note.\n"..
-					"Acceptable colour flags are :random, :class, :green, :red, :blue, :pink, :cyan, :yellow, and :orange.\n"..
-					":random follows the same rules as Prat-3.0's 'random' playername colouring setting.\n"..
-					"For example, &name:class would become "..class(UnitName("player"), UnitClass("player"))..".\n"..
-					"Anything else will be assumed to be part of the message.",
+				name = L["Tutorial"]:format(class(UnitName("player"), UnitClass("player"))),
 			},
 			guildOn = {
-				name = "Guild Log-on Message",
-				desc = "Format string for when guild members sign on",
+				name = L["Guild Log-on Message"],
+				desc = L["Format string for when guild members sign on"],
 				type = "input", order = 2, arg = "guildOn", width = "full",
 			},
 			guildOff = {
-				name = "Guild Log-off Message",
-				desc = "Format string for when guild members log off",
+				name = L["Guild Log-off Message"],
+				desc = L["Format string for when guild members log off"],
 				type = "input", order = 3, arg = "guildOff", width = "full",
 			},
 			friendOn = {
-				name = "Friend Log-on Message",
-				desc = "Format string for when friends sign on",
+				name = L["Friend Log-on Message"],
+				desc = L["Format string for when friends sign on"],
 				type = "input", order = 4, arg = "friendOn", width = "full",
 			},
 			friendOff = {
-				name = "Friend Log-off Message",
-				desc = "Format string for when friends log off",
+				name = L["Friend Log-off Message"],
+				desc = L["Format string for when friends log off"],
 				type = "input", order = 5, arg = "friendOff", width = "full",
 			},
 		},
