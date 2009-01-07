@@ -20,6 +20,7 @@ Lib\AceLocale-3.0\AceLocale-3.0.lua
 #@end-no-lib-strip@
 
 enUS.lua
+ruRU.lua
 
 Core.lua
 
