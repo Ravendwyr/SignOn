@@ -105,19 +105,19 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 		else msg = db.friendOff end
 	end
 
-	-- add in colours
-	msg = msg:gsub("([&%w]%w+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
-	msg = msg:gsub("([&%w]%w+):random", random(name))
-	msg = msg:gsub("([&%w]%w+):green", "|cff00ff00%1|r")
-	msg = msg:gsub("([&%w]%w+):red", "|cffff0000%1|r")
-	msg = msg:gsub("([&%w]%w+):blue", "|cff0000ff%1|r")
-	msg = msg:gsub("([&%w]%w+):pink", "|cffff00ff%1|r")
-	msg = msg:gsub("([&%w]%w+):cyan", "|cff00ffff%1|r")
-	msg = msg:gsub("([&%w]%w+):yellow", "|cffffff00%1|r")
-	msg = msg:gsub("([&%w]%w+):orange", "|cffff7f00%1|r")
-
 	-- add in data
 	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
+
+	-- add in colours
+	msg = msg:gsub("([^:%s]+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
+	msg = msg:gsub("([^:%s]+):random", random)
+	msg = msg:gsub("([^:%s]+):green", "|cff00ff00%1|r")
+	msg = msg:gsub("([^:%s]+):red", "|cffff0000%1|r")
+	msg = msg:gsub("([^:%s]+):blue", "|cff0000ff%1|r")
+	msg = msg:gsub("([^:%s]+):pink", "|cffff00ff%1|r")
+	msg = msg:gsub("([^:%s]+):cyan", "|cff00ffff%1|r")
+	msg = msg:gsub("([^:%s]+):yellow", "|cffffff00%1|r")
+	msg = msg:gsub("([^:%s]+):orange", "|cffff7f00%1|r")
 
 	if online then -- add in player links
 		msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
