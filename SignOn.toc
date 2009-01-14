@@ -1,7 +1,7 @@
 ## Interface: 30000
 ## Title: Sign On
 ## Version: @project-version@
-## Notes: Allows you to customise guild and friend signon/signoff messages (originally written by CipherSoft)
+## Notes: Allows you to customise guild and friend signon/signoff messages. (originally written by CipherSoft)
 ## Author: Ethan Centaurai
 ## X-eMail: ethan.centaurai@live.co.uk
 ## X-Donate: PayPal:ethan.centaurai@live.co.uk
