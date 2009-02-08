@@ -135,6 +135,9 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
+	-- remove empty floating flags
+	msg = msg:gsub(":(%w+)", "")
+
 	return false, msg
 end
 
