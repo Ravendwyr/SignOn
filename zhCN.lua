@@ -3,10 +3,10 @@ local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "zhCN")
 if not L then return end
 
 L["(.-) has gone offline"] = "(.-)下线了" -- pattern
-L["<Friend> &name:random [&level &class:class] has logged:red off:red (Note: &note)"] = "<好友>[&level]&name:class已经 离线:red了 &note"
-L["<Friend> &name:random [&level &class:class] has signed:green on:green in &zone (Note: &note)"] = "<好友>[&level]&name:class已经在&zone 上线:green了 &note"
-L["<Guild> &rank &name:random [&level &class:class] has come:green online:green in &zone (Note: &note)"] = "<公会>[&level]&name:class已经在&zone 上线:green了(&rank)"
-L["<Guild> &rank &name:random [&level &class:class] has logged:red off:red (Note: &note)"] = "<公会> [&level]&name:class已经 离线:red了(&rank)"
+L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<好友> [&level]&name:class &alts:bracket已经 离线:red了 &note:bracket"
+L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<好友> [&level]&name:class &alts:bracket已经在&zone 上线:green了 &note:bracket"
+L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经在&zone 上线:green了(&rank)"
+L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经 离线:red了(&rank)"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h上线了" -- pattern
 L["Death Knight"] = "死亡骑士" -- class male
 L["DEATH KNIGHT"] = "死亡骑士" -- class female

@@ -3,10 +3,10 @@ local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "ruRU")
 if not L then return end
 
 L["(.-) has gone offline"] = "(.-) выходит из игрового мира." -- pattern
-L["<Friend> &name:random [&level &class:class] has logged:red off:red (Note: &note)"] = "<Друг> &name:random [&level &class:class] вышел:red (Примечание: &note)"
-L["<Friend> &name:random [&level &class:class] has signed:green on:green in &zone (Note: &note)"] = "<Друг> &name:random [&level &class:class] зашел:green в &zone (Примечание: &note)"
-L["<Guild> &rank &name:random [&level &class:class] has come:green online:green in &zone (Note: &note)"] = "<Гильдия> &rank &name:random [&level &class:class] зашел:green в &zone (Примечание: &note)"
-L["<Guild> &rank &name:random [&level &class:class] has logged:red off:red (Note: &note)"] = "<Гильдия> &rank &name:random [&level &class:class] вышел:red (Примечание: &note)"
+L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Друг> &name:random &alts:bracket [&level &class:class] вышел:red &note:bracket"
+L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<Друг> &name:random &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
+L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Гильдия> &rank &name:random &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
+L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Гильдия> &rank &name:random &alts:bracket [&level &class:class] вышел:red &note:bracket"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h входит в игру." -- pattern
 L["Death Knight"] = "Рыцарь смерти" -- class male
 L["DEATH KNIGHT"] = "Рыцарь смерти" -- class female

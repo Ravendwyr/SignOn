@@ -3,10 +3,10 @@ local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "enUS", true)
 if not L then return end
 
 L["(.-) has gone offline"] = true -- pattern
-L["<Friend> &name:random [&level &class:class] has logged:red off:red (Note: &note)"] = true
-L["<Friend> &name:random [&level &class:class] has signed:green on:green in &zone (Note: &note)"] = true
-L["<Guild> &rank &name:random [&level &class:class] has come:green online:green in &zone (Note: &note)"] = true
-L["<Guild> &rank &name:random [&level &class:class] has logged:red off:red (Note: &note)"] = true
+L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = true
+L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = true
+L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = true
+L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = true
 L["|Hplayer:(.-)|h.-|h has come online"] = true -- pattern
 L["Death Knight"] = true -- class male
 L["DEATH KNIGHT"] = true -- class female
