@@ -77,7 +77,7 @@ local function getUserData(playerName)
 
 	-- Then search friends
 	for i=1, GetNumFriends() do
-		u.name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
+		u.type, u.name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
 
 		if playerName == u.name then return u end
 	end
@@ -127,7 +127,12 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	msg = msg:gsub("([^:%s]+):yellow", "|cffffff00%1|r")
 	msg = msg:gsub("([^:%s]+):orange", "|cffff7f00%1|r")
 
-	 -- add in player links
+	-- add in brackets
+	msg = msg:gsub("([^:%s]+):bracket", "(%1)")
+	msg = msg:gsub("([^:%s]+):square", "[%1]")
+	msg = msg:gsub("([^:%s]+):angle", "<%1>")
+
+	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
 	return false, msg
