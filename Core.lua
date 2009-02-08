@@ -1,7 +1,10 @@
-﻿local L = LibStub("AceLocale-3.0"):GetLocale("SignOn", false)
-
+﻿
 local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
+
+local L = LibStub("AceLocale-3.0"):GetLocale("SignOn", false)
+local AltDB = LibStub("LibAlts-1.0")
 local db
+
 
 -- colouring functions 
 local classColours = {
@@ -52,15 +55,21 @@ local function class(text, c)
 	return "|cff"..hex..text.."|r"
 end
 
+
 -- core functions
 local function getUserData(playerName)
-	local u
+	local u = {}
 
-	-- Search guild
+	-- check if the player is an alt or a main
+	local main = AltDB:GetMain(playerName)
+	local alts = AltDB:GetAlts(playerName)
+
+	u.alts = main or alts or ""
+
+	-- Then search guild
 	if IsInGuild() then
 		for i=1, GetNumGuildMembers(true) do
-			u = { type = "GUILD" }
-			u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = GetGuildRosterInfo(i)
+			u.type, u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = "GUILD", GetGuildRosterInfo(i)
 
 			if playerName == u.name then return u end
 		end
@@ -68,14 +77,13 @@ local function getUserData(playerName)
 
 	-- Then search friends
 	for i=1, GetNumFriends() do
-		u = { type = "FRIEND" }
-		u.name, u.level, u.class, u.zone, _, _, u.note = GetFriendInfo(i)
+		u.name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
 
 		if playerName == u.name then return u end
 	end
 end
 
-local function signOn(message, player) -- 'player' is supplied by Prat, not by the filter call
+local function signOn(message, player) -- 'player' is supplied by Prat, not by the filter
 	local name, online
 
 	if message:find(L["has come online"]) then -- user came online
@@ -91,9 +99,9 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 
 	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out colour codes
 
-	-- have captured player name, and broken out of the function if this isnt the event we want.
+	-- have captured player name, and broken out of the function if this isnt the event we want
 	local data = getUserData(name)
-	if not data then return end -- couldn't get information, don't alter the text.
+	if not data then return end -- couldn't get information, don't alter the text
 
 	local msg
 
@@ -106,7 +114,7 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	end
 
 	-- add in data
-	msg = msg:gsub("&name", name):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
+	msg = msg:gsub("&name", name):gsub("&alts", data.alts):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
 	-- add in colours
 	msg = msg:gsub("([^:%s]+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
@@ -119,9 +127,8 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	msg = msg:gsub("([^:%s]+):yellow", "|cffffff00%1|r")
 	msg = msg:gsub("([^:%s]+):orange", "|cffff7f00%1|r")
 
-	if online then -- add in player links
-		msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h")
-	end
+	 -- add in player links
+	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
 	return false, msg
 end
@@ -188,8 +195,8 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	local _, msg = signOn(message.MESSAGE, message.PLAYER)
 	if not msg then return end
 
-	-- nil out all message data except actual content.
-	-- we have to do this otherwise the players name will appear twice in the message.
+	-- nil out all message data except actual content
+	-- we have to do this otherwise the players name will appear twice in the message
 	-- it doesn't happen for signoff messages; what would be the point of a hyperlink to someone who just left? :)
 	message.MESSAGE = msg
 	message.PLAYER = ""
