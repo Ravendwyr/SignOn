@@ -8,25 +8,15 @@ local db
 
 -- colouring functions 
 local classColours = {
-	[L["Death Knight"]] = "c41e3a",
 	[L["DEATH KNIGHT"]] = "c41e3a",
-	[L["Druid"]] = "ff7c0a",
 	[L["DRUID"]] = "ff7c0a",
-	[L["Hunter"]] = "aad372",
 	[L["HUNTER"]] = "aad372",
-	[L["Mage"]] = "68ccef",
 	[L["MAGE"]] = "68ccef",
-	[L["Paladin"]] = "f48cba",
 	[L["PALADIN"]] = "f48cba",
-	[L["Priest"]] = "ffffff",
 	[L["PRIEST"]] = "ffffff",
-	[L["Rogue"]] = "fff468",
 	[L["ROGUE"]] = "fff468",
-	[L["Shaman"]] = "2359ff",
 	[L["SHAMAN"]] = "2359ff",
-	[L["Warrior"]] = "c69b6d",
 	[L["WARRIOR"]] = "c69b6d",
-	[L["Warlock"]] = "9382c9",
 	[L["WARLOCK"]] = "9382c9",
 }
 
@@ -51,6 +41,8 @@ local function random(text) -- copied from Prat-3.0
 end
 
 local function class(text, c)
+	c = c:upper()
+
 	local hex = classColours[c]
 	return "|cff"..hex..text.."|r"
 end
