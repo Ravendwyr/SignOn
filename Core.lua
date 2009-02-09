@@ -124,12 +124,13 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	msg = msg:gsub("([^:%s]+):square", "[%1]")
 	msg = msg:gsub("([^:%s]+):angle", "<%1>")
 
-	-- add in player links
-	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
-
 	-- remove empty floating flags
 	msg = msg:gsub(":(%w+)", "")
 
+	-- add in player links
+	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
+
+	print(msg)
 	return false, msg
 end
 
@@ -184,7 +185,8 @@ function SignOn:OnEnable()
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
 
-	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
+--	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
+	_G.SlashCmdList["SIGNON"] = function() signOn("Kylura") end
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
 end
