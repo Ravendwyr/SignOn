@@ -125,6 +125,7 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	msg = msg:gsub("([^:%s]+):cyan", "|cff00ffff%1|r")
 	msg = msg:gsub("([^:%s]+):yellow", "|cffffff00%1|r")
 	msg = msg:gsub("([^:%s]+):orange", "|cffff7f00%1|r")
+	msg = msg:gsub("([^:%s]+):white", "|cffffffff%1|r")
 
 	-- add in brackets
 	msg = msg:gsub("([^:%s]+):bracket", "(%1)")
