@@ -143,7 +143,6 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
-	print(msg)
 	return false, msg
 end
 
@@ -213,8 +212,7 @@ function SignOn:OnEnable()
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
 
---	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
-	_G.SlashCmdList["SIGNON"] = function() signOn("|Hplayer:Kylura|hKylura|h has come online") end
+	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
 end
