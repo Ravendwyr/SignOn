@@ -20,6 +20,12 @@ local classColours = {
 	[L["WARLOCK"]] = "9382c9",
 }
 
+local function getHex(r, g, b, text)
+	r, g, b = r*255, g*255, b*255
+
+	return ("|cff%02x%02x%02x%s|r"):format(r, g, b, text)
+end
+
 local function random(text) -- copied from Prat-3.0
 	local hash = 17
 
@@ -110,6 +116,7 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 
 	-- add in colours
 	msg = msg:gsub("([^:%s]+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
+	msg = msg:gsub("([^:%s]+):custom", getHex(db.custom.r, db.custom.g, db.custom.b, "%1"))
 	msg = msg:gsub("([^:%s]+):random", random)
 	msg = msg:gsub("([^:%s]+):green", "|cff00ff00%1|r")
 	msg = msg:gsub("([^:%s]+):red", "|cffff0000%1|r")
@@ -141,6 +148,8 @@ function SignOn:OnEnable()
 		guildOff = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
 		friendOn = L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"],
 		friendOff = L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
+
+		custom = { r = 0.6, g = 0.6, b = 0.6 },
 	}}, "Default")
 
 	db = self.db.profile
@@ -180,13 +189,26 @@ function SignOn:OnEnable()
 				desc = L["Format string for when friends log off"],
 				type = "input", order = 5, arg = "friendOff", width = "full",
 			},
+			custom = {
+				name = "Custom Colour",
+				desc = "Set the colour for the :custom colour flag.",
+				type = "color", order = 6, arg = "custom", hasAlpha = false,
+				get = function()
+					local t = db.custom
+					return t.r, t.g, t.b
+				end,
+				set = function(_, r, g, b)
+					local t = db.custom
+					t.r, t.g, t.b = r, g, b
+				end,
+			},
 		},
 	})
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
 
 --	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
-	_G.SlashCmdList["SIGNON"] = function() signOn("Kylura") end
+	_G.SlashCmdList["SIGNON"] = function() signOn("|Hplayer:Kylura|hKylura|h has come online") end
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
 end
