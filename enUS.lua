@@ -28,10 +28,11 @@ L["ROGUE"] = true
 L["SHAMAN"] = true
 L["Tutorial"] = "Strings can contain tags, flags and any other characters.\
 Acceptable tags are &name, &level, &class, &alts, &zone, &rank, and &note.\
-Acceptable colour flags are :random, :class, :green, :red, :blue, :pink, :cyan, :yellow, and :orange.\
-Acceptable brakcet flags are :bracket, :square, and :angle.\
+Acceptable colour flags are :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white, and :orange.\
+Acceptable bracket flags are :bracket, :square, and :angle.\
 :random follows the same rules as Prat-3.0's 'random' playername colouring setting.\
-For example, &name:class would become %s.\
+:custom is a colour you choose using the swatch below the messages.\
+For example, &name:class:square would become %s.\
 Anything else will be assumed to be part of the message."
 L["WARLOCK"] = true
 L["WARRIOR"] = true

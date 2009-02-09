@@ -172,7 +172,7 @@ function SignOn:OnEnable()
 		args = {
 			desc = {
 				type = "description", order = 1,
-				name = L["Tutorial"]:format(class(UnitName("player"), UnitClass("player"))),
+				name = L["Tutorial"]:format(class("["..UnitName("player").."]", UnitClass("player"))),
 			},
 			guildOn = {
 				name = L["Guild Log-on Message"],
