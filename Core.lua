@@ -114,23 +114,28 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	-- add in data
 	msg = msg:gsub("&name", name):gsub("&alts", data.alts):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
-	-- add in colours
-	msg = msg:gsub("([^:%s]+):class", class("%1", data.class)) -- %1 is the text minus the colour flag
-	msg = msg:gsub("([^:%s]+):custom", getHex(db.custom.r, db.custom.g, db.custom.b, "%1"))
-	msg = msg:gsub("([^:%s]+):random", random)
-	msg = msg:gsub("([^:%s]+):green", "|cff00ff00%1|r")
-	msg = msg:gsub("([^:%s]+):red", "|cffff0000%1|r")
-	msg = msg:gsub("([^:%s]+):blue", "|cff0000ff%1|r")
-	msg = msg:gsub("([^:%s]+):pink", "|cffff00ff%1|r")
-	msg = msg:gsub("([^:%s]+):cyan", "|cff00ffff%1|r")
-	msg = msg:gsub("([^:%s]+):yellow", "|cffffff00%1|r")
-	msg = msg:gsub("([^:%s]+):orange", "|cffff7f00%1|r")
-	msg = msg:gsub("([^:%s]+):white", "|cffffffff%1|r")
-
 	-- add in brackets
-	msg = msg:gsub("([^:%s]+):bracket", "(%1)")
-	msg = msg:gsub("([^:%s]+):square", "[%1]")
-	msg = msg:gsub("([^:%s]+):angle", "<%1>")
+	msg = msg:gsub("([^%s]+):bracket", "(%1)") -- %1 is the text minus the flags
+	msg = msg:gsub("([^%s]+):square", "[%1]")
+	msg = msg:gsub("([^%s]+):angle", "<%1>")
+
+	-- add in colours
+	msg = msg:gsub("([^%s]+):class", class("%1", data.class))
+	msg = msg:gsub("([^%s]+):custom", getHex(db.custom.r, db.custom.g, db.custom.b, "%1"))
+	msg = msg:gsub("([^%s]+):random", random)
+	msg = msg:gsub("([^%s]+):green", "|cff00ff00%1|r")
+	msg = msg:gsub("([^%s]+):red", "|cffff0000%1|r")
+	msg = msg:gsub("([^%s]+):blue", "|cff0000ff%1|r")
+	msg = msg:gsub("([^%s]+):pink", "|cffff00ff%1|r")
+	msg = msg:gsub("([^%s]+):cyan", "|cff00ffff%1|r")
+	msg = msg:gsub("([^%s]+):yellow", "|cffffff00%1|r")
+	msg = msg:gsub("([^%s]+):orange", "|cffff7f00%1|r")
+	msg = msg:gsub("([^%s]+):white", "|cffffffff%1|r")
+
+	-- fix unpainted right-side brackets
+	msg = msg:gsub("|r[\41]", "\41|r") -- bracket
+	msg = msg:gsub("|r[\62]", "\62|r") -- angle
+	msg = msg:gsub("|r[\93]", "\93|r") -- square
 
 	-- remove empty floating flags
 	msg = msg:gsub(":(%w+)", "")
