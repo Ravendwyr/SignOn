@@ -1,0 +1,51 @@
+Version 2.3.1
+- Added custom colour support! Choose a colour from the swatch in the options frame, and use the new :custom flag to paint text in that colour!
+- Added a :white flag.
+- Fixed player links (oops).
+- Brackets will now be coloured properly, now matter how bizarre the tag/flag combo is.
+- Use the LibStub and CallbackHandler-1.0 files included with LibAlts-1.0, rather than packaging two copies of the same files.
+- Update tutorial message (fix a typo, add new flags, change example).
+
+Version 2.3
+- Added LibAlts-1.0 support in the form of a new tag, &alts. This will return the name of an alt's main, a list of alts if it is the main, or nothing if no data was found.
+- Added bracket flags (:bracket, :square, :angle).
+- Updated default messages to use new tags and flags.
+- Any flags which aren't properly attached to text will now be hidden.
+- Fixed a bug where Prat-3.0 could sneak some extra data past our security check.
+
+Version 2.2.6
+- Added Simplified Chinese localisation. Thanks fryy!
+
+Version 2.2.5
+- Added Russian localisation. Thanks zuz666!
+
+Version 2.2.4a
+- The :class flag no longer paints Rogues with Warlock colours.
+- Added preliminary multilingual support... translators needed!
+
+Version 2.2.3
+- Fixed party/bg/raid/who issues for Prat-3.0 users.
+- Added compatibility for special letters.
+- Playerlinks are now only created in log-on messages.
+
+Version 2.2.2
+- You can now use colour flags to colour text of your choice, e.g. &name:green.
+- Updated default messages to use new colour flags.
+- Improve the options layout.
+- Add slash commands '/signon' and '/so' for Cralor.
+- The options added in Version 2.2.1 have been removed as a result. Please update to the new colour flags (or not, it's your choice)!
+
+Version 2.2.1
+- Added an option to colour the keywords "online" and "logged on" green, and "offline" and "logged off" red.
+
+Version 2.2
+- Re-written as a standalone addon.
+
+Version 2.1.1
+- Add option to colour player names. This will colour names using the same settings you chose in the PlayerNames module (random, class, none etc). This option is off by default.
+
+Version 2.1
+- Fixed bug where the wrong data was being pulled from the guild roster due to similar player names.
+
+Version 2.0
+- Update to WoW-3.0 and Prat-3.0.
