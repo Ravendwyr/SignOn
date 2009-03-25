@@ -36,4 +36,3 @@ For example, &name:class:square would become %s.\
 Anything else will be assumed to be part of the message."
 L["WARLOCK"] = true
 L["WARRIOR"] = true
-

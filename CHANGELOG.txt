@@ -1,3 +1,6 @@
+Version 2.3.2
+- Updated for WoW 3.1.0
+
 Version 2.3.1
 - Added custom colour support! Choose a colour from the swatch in the options frame, and use the new :custom flag to paint text in that colour!
 - Added a :white flag.

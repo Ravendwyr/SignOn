@@ -1,11 +1,8 @@
-## Interface: 30000
+﻿## Interface: 30000
 ## Title: Sign On
-## Version: @project-version@
 ## Notes: Allows you to customise guild and friend signon/signoff messages (originally written by CipherSoft)
 ## Author: Ethan Centaurai
-## X-eMail: ethan.centaurai@live.co.uk
-## X-Donate: PayPal:ethan.centaurai@live.co.uk
-## X-Category: Chat/Communication
+## Version: 2.3.2
 ## SavedVariables: SignOnDB
 ## OptionalDeps: Ace3, Prat-3.0
 
@@ -25,4 +22,3 @@ ruRU.lua
 zhCN.lua
 
 Core.lua
-
