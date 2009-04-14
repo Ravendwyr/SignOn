@@ -52,3 +52,6 @@ Version 2.1
 
 Version 2.0
 - Update to WoW-3.0 and Prat-3.0.
+
+Version 1.0
+- Initial release by CipherSoft.
