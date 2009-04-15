@@ -1,7 +1,7 @@
 ﻿
 local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
 
-local L = LibStub("AceLocale-3.0"):GetLocale("SignOn", false)
+local L = LibStub("AceLocale-3.0"):GetLocale("SignOn")
 local AltDB = LibStub("LibAlts-1.0")
 local db
 
@@ -81,21 +81,14 @@ local function getUserData(playerName)
 	end
 end
 
-local function signOn(message, player) -- 'player' is supplied by Prat, not by the filter
+local function signOn(_, _, message, ...)
 	local name, online
 
-	if message:find(L["has come online"]) then -- user came online
+	if message:find(L["has come online"]) then
 		name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
-
-	elseif message:find(L["has gone offline"]) then -- user went offline
+	elseif message:find(L["has gone offline"]) then
 		name, online = message:match(L["(.-) has gone offline"]), false
-
 	else return end
-
-	if not name then if player then name = player
-	else return end end
-
-	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out colour codes
 
 	-- have captured player name, and broken out of the function if this isnt the event we want
 	local data = getUserData(name)
@@ -132,7 +125,7 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	msg = msg:gsub("([^%s]+):orange", "|cffff7f00%1|r")
 	msg = msg:gsub("([^%s]+):white", "|cffffffff%1|r")
 
-	-- fix unpainted right-side brackets
+	-- fix unpainted brackets
 	msg = msg:gsub("|r[\41]", "\41|r") -- bracket
 	msg = msg:gsub("|r[\62]", "\62|r") -- angle
 	msg = msg:gsub("|r[\93]", "\93|r") -- square
@@ -143,7 +136,7 @@ local function signOn(message, player) -- 'player' is supplied by Prat, not by t
 	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
-	return false, msg
+	return false, msg, ...
 end
 
 
@@ -159,11 +152,7 @@ function SignOn:OnEnable()
 
 	db = self.db.profile
 
-	if IsAddOnLoaded("Prat-3.0") then
-		Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
-	else
-		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", signOn)
-	end
+	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", signOn)
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("SignOn", {
 		name = "Sign On", type = "group",
@@ -216,27 +205,3 @@ function SignOn:OnEnable()
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
 end
-
-function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
-	if event ~= "CHAT_MSG_SYSTEM" then return end
-
-	local _, msg = signOn(message.MESSAGE, message.PLAYER)
-	if not msg then return end
-
-	-- nil out all message data except actual content
-	-- we have to do this otherwise the players name will appear twice in the message
-	-- it doesn't happen for signoff messages; what would be the point of a hyperlink to someone who just left? :)
-	message.MESSAGE = msg
-	message.PLAYER = ""
-	message.PLAYERLINK = ""
-	message.PLAYERLINKDATA = ""
-	message.PLAYERLEVEL = ""
-	message.PREPLAYERDELIM = ""
-	message.ALTNAMES = ""
-	message.lL = ""
-	message.LL = ""
-	message.Ll = ""
-	message.pP = ""
-	message.Pp = ""
-end
-
