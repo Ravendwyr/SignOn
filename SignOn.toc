@@ -2,7 +2,7 @@
 ## Title: Sign On
 ## Notes: Allows you to customise guild and friend signon/signoff messages (originally written by CipherSoft)
 ## Author: Ethan Centaurai
-## Version: 2.3.3
+## Version: 2.3.4
 ## SavedVariables: SignOnDB
 ## OptionalDeps: Ace3
 
