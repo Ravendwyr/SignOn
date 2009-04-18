@@ -51,7 +51,9 @@ local function random(text) -- copied from Prat-3.0
 end
 
 local function class(text, c)
-	c = c:gsub("(%s)", ""):upper()
+	if text == "Knight" then text = "Death Knight" end -- hack, might cause problems with users named "Knight".
+
+	c = c:upper()
 
 	local hex = classColours[c]
 	return "|cff"..hex..text.."|r"
