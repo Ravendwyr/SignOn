@@ -27,9 +27,7 @@ end
 
 
 local function getHex(r, g, b, text)
-	r, g, b = r*255, g*255, b*255
-
-	return ("|cff%02x%02x%02x%s|r"):format(r, g, b, text)
+	return ("|cff%02x%02x%02x%s|r"):format(r*255, g*255, b*255, text)
 end
 
 local function random(text) -- copied from Prat-3.0
