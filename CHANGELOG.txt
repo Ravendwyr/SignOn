@@ -1,5 +1,6 @@
-Version 2.3.4
+Version 2.3.4a
 - Added ClassColors support.
+- Fix the colouring of "Death Knight". Previously, only "Knight" was coloured.
 
 Version 2.3.3
 - Really updated for WoW 3.1.0 (I couldn't get on the PTR... /excuses)
