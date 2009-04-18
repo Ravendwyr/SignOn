@@ -7,18 +7,24 @@ local db
 
 
 -- colouring functions 
-local classColours = {
-	[L["DEATH KNIGHT"]] = "c41e3a",
-	[L["DRUID"]] = "ff7c0a",
-	[L["HUNTER"]] = "aad372",
-	[L["MAGE"]] = "68ccef",
-	[L["PALADIN"]] = "f48cba",
-	[L["PRIEST"]] = "ffffff",
-	[L["ROGUE"]] = "fff468",
-	[L["SHAMAN"]] = "2359ff",
-	[L["WARRIOR"]] = "c69b6d",
-	[L["WARLOCK"]] = "9382c9",
-}
+local classColours = {}
+
+if CUSTOM_CLASS_COLORS then
+	for k, v in pairs(CUSTOM_CLASS_COLORS) do
+		classColours[k] = string.format("%02x%02x%02x", v.r * 255, v.g * 255, v.b * 255)
+	end
+
+	CUSTOM_CLASS_COLORS:RegisterCallback(function()
+		for k, v in pairs(CUSTOM_CLASS_COLORS) do
+			classColours[k] = string.format("%02x%02x%02x", v.r * 255, v.g * 255, v.b * 255)
+		end
+	end)
+else
+	for k, v in pairs(RAID_CLASS_COLORS) do
+		classColours[k] = string.format("%02x%02x%02x", v.r * 255, v.g * 255, v.b * 255)
+	end
+end
+
 
 local function getHex(r, g, b, text)
 	r, g, b = r*255, g*255, b*255
@@ -47,7 +53,7 @@ local function random(text) -- copied from Prat-3.0
 end
 
 local function class(text, c)
-	c = c:upper()
+	c = c:gsub("(%s)", ""):upper()
 
 	local hex = classColours[c]
 	return "|cff"..hex..text.."|r"
