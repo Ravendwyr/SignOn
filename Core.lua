@@ -51,8 +51,6 @@ local function random(text) -- copied from Prat-3.0
 end
 
 local function class(text, c)
-	if text == "Knight" then text = "Death Knight" end -- hack, might cause problems with users named "Knight".
-
 	c = c:upper()
 
 	local hex = classColours[c]
@@ -130,6 +128,9 @@ local function signOn(_, _, message, ...)
 	msg = msg:gsub("([^%s]+):yellow", "|cffffff00%1|r")
 	msg = msg:gsub("([^%s]+):orange", "|cffff7f00%1|r")
 	msg = msg:gsub("([^%s]+):white", "|cffffffff%1|r")
+
+	-- fix "Death Knight"
+	msg = msg:gsub("Death |cff(.-)Knight|r", "|cff%1Death Knight|r")
 
 	-- fix unpainted brackets
 	msg = msg:gsub("|r[\41]", "\41|r") -- bracket
