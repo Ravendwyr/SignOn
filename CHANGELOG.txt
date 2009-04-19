@@ -1,7 +1,10 @@
+Version 2.3.6
+- Fixed Prat-3.0 compatibility. The "now redundant" layer I removed in Version 2.3.3 wasn't so redundant after all...
+
 Version 2.3.5
 - Fixed a silly bug I introduced in the last version.
 
-Version 2.3.4a
+Version 2.3.4
 - Added !ClassColors support.
 - Fix the colouring of "Death Knight". Previously, only "Knight" was coloured.
 
@@ -33,7 +36,7 @@ Version 2.2.6
 Version 2.2.5
 - Added Russian localisation. Thanks zuz666!
 
-Version 2.2.4a
+Version 2.2.4
 - The :class flag no longer paints Rogues with Warlock colours.
 - Added preliminary multilingual support... translators needed!
 
