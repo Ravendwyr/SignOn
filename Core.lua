@@ -26,10 +26,6 @@ else
 end
 
 
-local function getHex(r, g, b, text)
-	return ("|cff%02x%02x%02x%s|r"):format(r*255, g*255, b*255, text)
-end
-
 local function random(text) -- copied from Prat-3.0
 	local hash = 17
 
@@ -118,7 +114,7 @@ local function signOn(_, _, message, ...)
 
 	-- add in colours
 	msg = msg:gsub("([^%s]+):class", class("%1", data.class))
-	msg = msg:gsub("([^%s]+):custom", getHex(db.custom.r, db.custom.g, db.custom.b, "%1"))
+	msg = msg:gsub("([^%s]+):custom", ("|cff%02x%02x%02x%s|r"):format(db.custom.r*255, db.custom.g*255, db.custom.b*255, "%1"))
 	msg = msg:gsub("([^%s]+):random", random)
 	msg = msg:gsub("([^%s]+):green", "|cff00ff00%1|r")
 	msg = msg:gsub("([^%s]+):red", "|cffff0000%1|r")
