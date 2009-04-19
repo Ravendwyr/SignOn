@@ -143,6 +143,10 @@ local function signOn(_, _, message, ...)
 	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
+	--@debug@
+	print(msg or "oh noes!")
+	--@end-debug@
+
 	return false, msg, ...
 end
 
@@ -204,6 +208,7 @@ function SignOn:OnEnable()
 				end,
 			},
 		},
+
 	})
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
@@ -211,4 +216,9 @@ function SignOn:OnEnable()
 	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
+
+	--@debug@
+	_G.SlashCmdList["SIGNONTEST"] = function(msg) signOn(nil, nil, ("|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
+	_G["SLASH_SIGNONTEST1"] = "/sotest"
+	--@end-debug@
 end
