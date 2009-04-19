@@ -143,9 +143,9 @@ local function signOn(_, _, message, ...)
 	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
-	--@debug@
-	print(msg or "oh noes!")
-	--@end-debug@
+	--@debug@--
+	if db.debug then print(msg or "oh noes!") return true end
+	--@end-debug@--
 
 	return false, msg, ...
 end
@@ -158,7 +158,7 @@ function SignOn:OnEnable()
 		friendOn = L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"],
 		friendOff = L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
 
-		custom = { r = 0.6, g = 0.6, b = 0.6 },
+		custom = { r = 0.6, g = 0.6, b = 0.6 }, debug = false,
 	}}, "Default")
 
 	db = self.db.profile
@@ -207,6 +207,12 @@ function SignOn:OnEnable()
 					t.r, t.g, t.b = r, g, b
 				end,
 			},
+			--@debug@--
+			debug = {
+				name = "|cffc41e3aDebug|r",
+				type = "toggle", order = 99, arg = "debug",
+			},
+			--@end-debug@--
 		},
 
 	})
@@ -217,8 +223,8 @@ function SignOn:OnEnable()
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
 
-	--@debug@
-	_G.SlashCmdList["SIGNONTEST"] = function(msg) signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
+	--@debug@--
+	_G.SlashCmdList["SIGNONTEST"] = function(msg) db.debug = true signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
 	_G["SLASH_SIGNONTEST1"] = "/sotest"
-	--@end-debug@
+	--@end-debug@--
 end
