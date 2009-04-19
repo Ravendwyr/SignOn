@@ -11,17 +11,17 @@ local classColours = {}
 
 if CUSTOM_CLASS_COLORS then
 	for k, v in pairs(CUSTOM_CLASS_COLORS) do
-		classColours[k] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
+		classColours[L[k]] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
 	end
 
 	CUSTOM_CLASS_COLORS:RegisterCallback(function()
 		for k, v in pairs(CUSTOM_CLASS_COLORS) do
-			classColours[k] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
+			classColours[L[k]] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
 		end
 	end)
 else
 	for k, v in pairs(RAID_CLASS_COLORS) do
-		classColours[k] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
+		classColours[L[k]] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
 	end
 end
 

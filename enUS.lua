@@ -1,4 +1,4 @@
-﻿-- English localization file for enUS and enGB
+-- English localization file for enUS and enGB
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "enUS", true)
 if not L then return end
 
@@ -8,7 +8,7 @@ L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = true
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = true
 L["|Hplayer:(.-)|h.-|h has come online"] = true
-L["DEATH KNIGHT"] = true
+L["DEATHKNIGHT"] = "DEATH KNIGHT"
 L["DRUID"] = true
 L["Format string for when friends log off"] = true
 L["Format string for when friends sign on"] = true

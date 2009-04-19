@@ -8,7 +8,7 @@ L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经在&zone 上线:green了(&rank)"
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经 离线:red了(&rank)"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h上线了"
-L["DEATH KNIGHT"] = "死亡骑士"
+L["DEATHKNIGHT"] = "死亡骑士"
 L["DRUID"] = "德鲁伊"
 L["Format string for when friends log off"] = "当好友离线时候的字符串格式"
 L["Format string for when friends sign on"] = "当好友上线时候的字符串格式"

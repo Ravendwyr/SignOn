@@ -8,7 +8,7 @@ L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Гильдия> &rank &name:random &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Гильдия> &rank &name:random &alts:bracket [&level &class:class] вышел:red &note:bracket"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h входит в игру."
-L["DEATH KNIGHT"] = "Рыцарь смерти"
+L["DEATHKNIGHT"] = "Рыцарь смерти"
 L["DRUID"] = "Друид"
 L["Format string for when friends log off"] = "Шаблон сообщения для случая, когда друг выходит из игрового мира"
 L["Format string for when friends sign on"] = "Шаблон сообщения для случая, когда друг входит в игровой мир"
