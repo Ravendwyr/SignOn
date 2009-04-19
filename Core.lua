@@ -218,7 +218,7 @@ function SignOn:OnEnable()
 	_G["SLASH_SIGNON2"] = "/so"
 
 	--@debug@
-	_G.SlashCmdList["SIGNONTEST"] = function(msg) signOn(nil, nil, ("|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
+	_G.SlashCmdList["SIGNONTEST"] = function(msg) signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
 	_G["SLASH_SIGNONTEST1"] = "/sotest"
 	--@end-debug@
 end
