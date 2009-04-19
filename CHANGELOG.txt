@@ -1,9 +1,12 @@
+Version 2.3.5
+- Fixed a silly bug I introduced in the last version.
+
 Version 2.3.4a
-- Added ClassColors support.
+- Added !ClassColors support.
 - Fix the colouring of "Death Knight". Previously, only "Knight" was coloured.
 
 Version 2.3.3
-- Really updated for WoW 3.1.0 (I couldn't get on the PTR... /excuses)
+- Really updated for WoW 3.1.0 (I couldn't get on the PTR... /excuses).
 - Remove now redundant Prat-3.0 hack layer.
 
 Version 2.3.2
@@ -14,7 +17,7 @@ Version 2.3.1
 - Added a :white flag.
 - Fixed player links (oops).
 - Brackets will now be coloured properly, now matter how bizarre the tag/flag combo is.
-- Use the LibStub and CallbackHandler-1.0 files included with LibAlts-1.0, rather than packaging two copies of the same files.
+- Use the LibStub and CallbackHandler-1.0 files included with LibAlts-1.0, rather than packaging two copies of the same file.
 - Update tutorial message (fix a typo, add new flags, change example).
 
 Version 2.3
@@ -37,13 +40,13 @@ Version 2.2.4a
 Version 2.2.3
 - Fixed party/bg/raid/who issues for Prat-3.0 users.
 - Added compatibility for special letters.
-- Playerlinks are now only created in log-on messages.
+- Player links are now only created in log-on messages.
 
 Version 2.2.2
 - You can now use colour flags to colour text of your choice, e.g. &name:green.
 - Updated default messages to use new colour flags.
 - Improve the options layout.
-- Add slash commands '/signon' and '/so' for Cralor.
+- Add slash commands '/signon' and '/so'.
 - The options added in Version 2.2.1 have been removed as a result. Please update to the new colour flags (or not, it's your choice)!
 
 Version 2.2.1
