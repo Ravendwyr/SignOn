@@ -199,12 +199,10 @@ function SignOn:OnEnable()
 				desc = "Set the colour for the :custom colour flag.",
 				type = "color", order = 6, arg = "custom", hasAlpha = false,
 				get = function()
-					local t = db.custom
-					return t.r, t.g, t.b
+					return db.custom.r, db.custom.g, db.custom.b
 				end,
 				set = function(_, r, g, b)
-					local t = db.custom
-					t.r, t.g, t.b = r, g, b
+					db.custom.r, db.custom.g, db.custom.b = r, g, b
 				end,
 			},
 			--@debug@--
