@@ -81,18 +81,20 @@ local function getUserData(playerName)
 	end
 end
 
-local function signOn(_, _, message, ...)
+local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supplied by Prat
 	local name, online
 
-	if message:find(L["has come online"]) then
-		name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
-	elseif message:find(L["has gone offline"]) then
-		name, online = message:match(L["(.-) has gone offline"]), false
+	if message:find(L["has come online"]) then name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
+	elseif message:find(L["has gone offline"]) then name, online = message:match(L["(.-) has gone offline"]), false
 	else return end
 
-	-- have captured player name, and broken out of the function if this isnt the event we want
+	if not name then if arg4 then name = arg4
+	else return end end -- couln't find a name, bail out
+
+	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out colour codes
+
 	local data = getUserData(name)
-	if not data then return end -- couldn't get information, don't alter the text
+	if not data then return end -- couldn't get information, bail out
 
 	local msg
 
@@ -143,7 +145,7 @@ local function signOn(_, _, message, ...)
 	if db.debug then print(msg or "oh noes!") return true end
 	--@end-debug@--
 
-	return false, msg, ...
+	return false, msg, arg4, ...
 end
 
 
@@ -159,7 +161,11 @@ function SignOn:OnEnable()
 
 	db = self.db.profile
 
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", signOn)
+	if IsAddOnLoaded("Prat-3.0") then
+		Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
+	else
+		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", signOn)
+	end
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("SignOn", {
 		name = "Sign On", type = "group",
@@ -221,4 +227,27 @@ function SignOn:OnEnable()
 	_G.SlashCmdList["SIGNONTEST"] = function(msg) db.debug = true signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
 	_G["SLASH_SIGNONTEST1"] = "/sotest"
 	--@end-debug@--
+end
+
+
+function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
+	if event ~= "CHAT_MSG_SYSTEM" then return end
+
+	local _, msg = signOn(nil, nil, message.MESSAGE, message.PLAYER)
+	if not msg then return end
+
+	-- nil out all message data except actual content
+	-- we have to do this otherwise the players name will appear twice in the message
+	message.MESSAGE = msg
+	message.PLAYER = ""
+	message.PLAYERLINK = ""
+	message.PLAYERLINKDATA = ""
+	message.PLAYERLEVEL = ""
+	message.PREPLAYERDELIM = ""
+	message.ALTNAMES = ""
+	message.lL = ""
+	message.LL = ""
+	message.Ll = ""
+	message.pP = ""
+	message.Pp = ""
 end
