@@ -127,14 +127,6 @@ local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supp
 	-- add in data
 	msg = msg:gsub("&name", name):gsub("&alts", data.alts):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
-	-- fix "Death Knight"
---	msg = msg:gsub("Death |cff(.-)Knight|r", "|cff%1Death Knight|r")
-
-	-- fix unpainted brackets
---	msg = msg:gsub("|r[\41]", "\41|r") -- bracket
---	msg = msg:gsub("|r[\62]", "\62|r") -- angle
---	msg = msg:gsub("|r[\93]", "\93|r") -- square
-
 	-- remove empty floating flags
 	msg = msg:gsub(":(%w+)", "")
 
