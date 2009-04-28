@@ -1,3 +1,6 @@
+Version 2.3.7
+- Message creation has been improved and will now colour and bracket all words in a sentence (f.i. &notes).
+
 Version 2.3.6
 - Fixed Prat-3.0 compatibility. The "now redundant" layer I removed in Version 2.3.3 wasn't so redundant after all...
 
@@ -10,7 +13,7 @@ Version 2.3.4
 
 Version 2.3.3
 - Really updated for WoW 3.1.0 (I couldn't get on the PTR... /excuses).
-- Remove now redundant Prat-3.0 hack layer.
+- Removed now redundant Prat-3.0 hack layer.
 
 Version 2.3.2
 - Updated for WoW 3.1.0.
