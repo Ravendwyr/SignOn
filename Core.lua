@@ -111,7 +111,7 @@ local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supp
 	--@end-debug@--
 
 	-- add in colours
-	msg = msg:gsub("([^%s]+):class", class("%1", data.class))
+	msg = msg:gsub("([^%s]+):class", class("%1", data.class)) -- %1 is the text minus the flags
 	msg = msg:gsub("([^%s]+):custom", ("|cff%02x%02x%02x%s|r"):format(db.custom.r*255, db.custom.g*255, db.custom.b*255, "%1"))
 	msg = msg:gsub("([^%s]+):random", random)
 	msg = msg:gsub("([^%s]+):green", "|cff00ff00%1|r")
@@ -124,7 +124,7 @@ local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supp
 	msg = msg:gsub("([^%s]+):white", "|cffffffff%1|r")
 
 	-- add in brackets
-	msg = msg:gsub("([^%s]+):bracket", "(%1)") -- %1 is the text minus the flags
+	msg = msg:gsub("([^%s]+):bracket", "(%1)")
 	msg = msg:gsub("([^%s]+):square", "[%1]")
 	msg = msg:gsub("([^%s]+):angle", "<%1>")
 
@@ -135,8 +135,8 @@ local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supp
 	-- add in data
 	msg = msg:gsub("&name", name):gsub("&alts", data.alts):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
-	-- remove empty floating flags
-	msg = msg:gsub(":(%w+)", "")
+	-- remove empty brackets
+	msg = msg:gsub("(%(%))", ""):gsub("(%[%])", ""):gsub("(<>)", "")
 
 	-- add in player links
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
