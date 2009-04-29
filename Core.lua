@@ -214,7 +214,6 @@ function SignOn:OnEnable()
 				end,
 			},
 		},
-
 	})
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
