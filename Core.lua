@@ -56,7 +56,7 @@ end
 
 -- core functions
 local function getUserData(playerName)
-	local u = {}
+	local u, name = {}
 
 	-- check if the player is an alt or a main
 	local main = AltDB:GetMain(playerName)
@@ -64,34 +64,34 @@ local function getUserData(playerName)
 
 	u.alts = main or alts or ""
 
-	-- Then search guild
+	-- search guild roster
 	if IsInGuild() then
 		for i=1, GetNumGuildMembers(true) do
-			u.type, u.name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = "GUILD", GetGuildRosterInfo(i)
+			u.type, name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = "GUILD", GetGuildRosterInfo(i)
 
-			if playerName == u.name then return u end
+			if playerName == name then return u end
 		end
 	end
 
-	-- Then search friends
+	-- search friends list
 	for i=1, GetNumFriends() do
-		u.type, u.name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
+		u.type, name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
 
-		if playerName == u.name then return u end
+		if playerName == name then return u end
 	end
 end
 
-local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supplied by Prat
+local function signOn(_, _, message, arg4, ...)
 	local name, online
 
 	if message:find(L["has come online"]) then name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
 	elseif message:find(L["has gone offline"]) then name, online = message:match(L["(.-) has gone offline"]), false
 	else return end
 
-	if not name then if arg4 then name = arg4
-	else return end end -- couln't find a name, bail out
+	if not name and arg4 then name = arg4 end -- arg4 is the player's name, supplied by Prat
+	if not name then return end -- couldn't get a name, bail out
 
-	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out colour codes
+	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out Prat colour codes
 
 	local data = getUserData(name)
 	if not data then return end -- couldn't get information, bail out
@@ -143,7 +143,7 @@ local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supp
 	if online then msg = msg:gsub(name, "|Hplayer:"..name.."|h%1|h") end
 
 	--@debug@--
-	if db.debug then print(msg) end
+	if db.debug then print(msg) return true, nil end -- nil for Prat
 	--@end-debug@--
 
 	return false, msg, arg4, ...
