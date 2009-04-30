@@ -135,7 +135,8 @@ local function signOn(_, _, message, arg4, ...) -- arg4 is the player name, supp
 	-- add in data
 	msg = msg:gsub("&name", name):gsub("&alts", data.alts):gsub("&level", tostring(data.level)):gsub("&class", data.class):gsub("&zone", data.zone or ""):gsub("&rank", data.rank or ""):gsub("&note", data.note or "")
 
-	-- remove empty brackets
+	-- remove empty brackets and colour code strings
+	msg = msg:gsub("|c%x%x%x%x%x%x%x%x|r", "")
 	msg = msg:gsub("(%(%))", ""):gsub("(%[%])", ""):gsub("(<>)", "")
 
 	-- add in player links
