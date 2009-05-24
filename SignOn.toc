@@ -22,5 +22,6 @@ deDE.lua
 frFR.lua
 ruRU.lua
 zhCN.lua
+zhTW.lua
 
 Core.lua
