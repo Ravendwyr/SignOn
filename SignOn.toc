@@ -18,6 +18,7 @@ Lib\LibAlts-1.0\LibAlts-1.0.lua
 #@end-no-lib-strip@
 
 enUS.lua
+deDE.lua
 ruRU.lua
 zhCN.lua
 
