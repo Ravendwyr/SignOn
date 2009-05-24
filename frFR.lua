@@ -1,5 +1,5 @@
 -- French localization file for frFR
-local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "deDE")
+local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "frFR")
 if not L then return end
 
 L["DEATHKNIGHT"] = "CHEVALIER DE LA MORT"
