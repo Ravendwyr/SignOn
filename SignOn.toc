@@ -19,6 +19,7 @@ Lib\LibAlts-1.0\LibAlts-1.0.lua
 
 enUS.lua
 deDE.lua
+frFR.lua
 ruRU.lua
 zhCN.lua
 
