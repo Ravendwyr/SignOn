@@ -1,4 +1,4 @@
-﻿-- Traditional Chinese localization file for zhTW
+-- Traditional Chinese localization file for zhTW
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "zhTW")
 if not L then return end
 

@@ -1,4 +1,4 @@
-﻿-- French localization file for frFR
+-- French localization file for frFR
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "frFR")
 if not L then return end
 

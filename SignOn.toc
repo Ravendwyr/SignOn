@@ -1,8 +1,8 @@
-## Interface: 30100
+## Interface: 30200
 ## Title: Sign On
 ## Notes: Allows you to customise guild and friend signon/signoff messages (originally written by CipherSoft)
 ## Author: Ethan Centaurai
-## Version: 2.3.9
+## Version: 2.3.10
 ## SavedVariables: SignOnDB
 ## OptionalDeps: Ace3
 

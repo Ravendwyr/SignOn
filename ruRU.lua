@@ -1,4 +1,4 @@
-﻿-- Russian localization file for ruRU, by Yuris Auzinsh (Zuz666).
+-- Russian localization file for ruRU, by Yuris Auzinsh (Zuz666).
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "ruRU")
 if not L then return end
 

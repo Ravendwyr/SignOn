@@ -1,4 +1,4 @@
-﻿-- Simplified Chinese localization file for zhCN, by fryy
+-- Simplified Chinese localization file for zhCN, by fryy
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "zhCN")
 if not L then return end
 
