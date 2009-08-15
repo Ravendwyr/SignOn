@@ -2,8 +2,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "frFR")
 if not L then return end
 
-L["DEATHKNIGHT"] = "CHEVALIER DE LA MORT"
-L["DRUID"] = "DRUID"
 L["Format string for when friends log off"] = "Format de la chaine de déconnexion d'un ami"
 L["Format string for when friends sign on"] = "Format de la chaine de connexion d'un ami"
 L["Format string for when guild members log off"] = "Format de la chaine de déconnexion d'un membre de la guilde"
@@ -20,12 +18,6 @@ L["has come online"] = "vient de se connecter"
 L["(.-) has gone offline"] = "(.-) vient de se déconnecter"
 L["has gone offline"] = "vient de se déconnecter"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h vient de se connecter"
-L["HUNTER"] = "CHASSEUR"
-L["MAGE"] = "Mage"
-L["PALADIN"] = "Paladin"
-L["PRIEST"] = "Prêtre"
-L["ROGUE"] = "VOLEUR"
-L["SHAMAN"] = "CHAMAN"
 L["Tutorial"] = [=[Les chaines peuvent contenir des tags, des balises ou d'autre joueurs.
 Les tags correctes sont &name, &level, &class, &alts, &zone, &rank, et &note.
 Les balises de couleur correctes sont :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white, et :orange.
@@ -34,5 +26,3 @@ Les balises pour les prentheses sont :bracket, :square, et :angle.
 :custom est une couleur que vous choisissez en utilisant la palette de couleur au-dessous des messages.
 Par exemple, &name:class:square deviendrait %s.
 Tous les autres caractères seront considéré comme des caractères a affiché.]=]
-L["WARLOCK"] = "Démoniste"
-L["WARRIOR"] = "Guerrier"

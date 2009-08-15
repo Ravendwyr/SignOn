@@ -2,8 +2,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "ruRU")
 if not L then return end
 
-L["DEATHKNIGHT"] = "Рыцарь смерти"
-L["DRUID"] = "Друид"
 L["Format string for when friends log off"] = "Шаблон сообщения для случая, когда друг выходит из игрового мира"
 L["Format string for when friends sign on"] = "Шаблон сообщения для случая, когда друг входит в игровой мир"
 L["Format string for when guild members log off"] = "Шаблон сообщения для случая, когда согильдиец входит в игровой мир"
@@ -20,17 +18,9 @@ L["has come online"] = "входит в игру."
 L["(.-) has gone offline"] = "(.-) выходит из игрового мира."
 L["has gone offline"] = "выходит из игрового мира."
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h входит в игру."
-L["HUNTER"] = "Охотница"
-L["MAGE"] = "Маг"
-L["PALADIN"] = "Паладин"
-L["PRIEST"] = "Жрица"
-L["ROGUE"] = "Разбойница"
-L["SHAMAN"] = "Шаманка"
 L["Tutorial"] = [=[Строки могут сождержать контектсные тэги, цветовые флаги и прочие символы.
 Контектсные тэги: &name, &level, &class, &alts, &zone, &rank, и &note.
 Цветовые флаги - :random, :class, :green, :red, :blue, :pink, :cyan, :yellow, и :orange.
 Флаг :random ведёт себя аналогично правилам Prat-3.0 для 'random'.
 Например, &name:class быдут выглядеть как %s.
 Все прочее символы трактуются как часть сообщения.]=] -- Needs review
-L["WARLOCK"] = "Чернокнижница"
-L["WARRIOR"] = "Воин"

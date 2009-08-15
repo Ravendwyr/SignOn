@@ -2,8 +2,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "deDE")
 if not L then return end
 
-L["DEATHKNIGHT"] = "TODESRITTER" -- Needs review
-L["DRUID"] = "Druide"
 L["Format string for when friends log off"] = "Formatstring wenn Freunde ausloggen"
 L["Format string for when friends sign on"] = "Formatstring wenn Freunde einloggen"
 L["Format string for when guild members log off"] = "Formatstring wenn Gildenmitglieder ausloggen"
@@ -20,12 +18,6 @@ L["has come online"] = "ist jetzt online"
 L["(.-) has gone offline"] = "(.-) ist jetzt offline"
 L["has gone offline"] = "ist jetzt offline"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h ist jetzt online"
-L["HUNTER"] = "Jäger"
-L["MAGE"] = "Magier"
-L["PALADIN"] = "Paladin"
-L["PRIEST"] = "Priester"
-L["ROGUE"] = "Schurke"
-L["SHAMAN"] = "Schamane"
 L["Tutorial"] = [=[Strings können Tags, Marker und beliebige andere Zeichen enthalten.
 Akzeptierte Tags sind &name, &level, &class, &alts, &zone, &rank und &note.
 Akzeptierte Farbmarker sind :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white und :orange.
@@ -34,5 +26,3 @@ Akzeptierte Klammermarker sind :bracket, :square und :angle.
 :custom ist eine Farbe die unten im Feld ausgewählt werden kann.
 Zum Beispiel: &name:class:square würde zu %s.
 Alles andere wird als Teil der Benachrichtigung angesehen.]=]
-L["WARLOCK"] = "Hexenmeister"
-L["WARRIOR"] = "Krieger"

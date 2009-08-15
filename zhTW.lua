@@ -2,8 +2,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "zhTW")
 if not L then return end
 
-L["DEATHKNIGHT"] = "死亡騎士"
-L["DRUID"] = "德魯伊"
 L["Format string for when friends log off"] = "Format string for when friends log off" -- Needs review
 L["Format string for when friends sign on"] = "Format string for when friends sign on" -- Needs review
 L["Format string for when guild members log off"] = "Format string for when guild members log off" -- Needs review
@@ -20,12 +18,6 @@ L["has come online"] = "上線了"
 L["(.-) has gone offline"] = "(.-)下線了"
 L["has gone offline"] = "下線了"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h上線了"
-L["HUNTER"] = "獵人"
-L["MAGE"] = "法師"
-L["PALADIN"] = "聖騎士"
-L["PRIEST"] = "牧師"
-L["ROGUE"] = "盜賊"
-L["SHAMAN"] = "薩滿"
 L["Tutorial"] = [=[Strings can contain tags, flags and any other characters.
 Acceptable tags are &name, &level, &class, &alts, &zone, &rank, and &note.
 Acceptable colour flags are :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white, and :orange.
@@ -34,5 +26,3 @@ Acceptable bracket flags are :bracket, :square, and :angle.
 :custom is a colour you choose using the swatch below the messages.
 For example, &name:class:square would become %s.
 Anything else will be assumed to be part of the message.]=] -- Needs review
-L["WARLOCK"] = "術士"
-L["WARRIOR"] = "戰士"

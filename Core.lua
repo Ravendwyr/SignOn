@@ -5,27 +5,27 @@ local L = LibStub("AceLocale-3.0"):GetLocale("SignOn")
 local AltDB = LibStub("LibAlts-1.0")
 local db
 
+local hexColors = {}
 
--- colouring functions 
-local classColours = {}
-
-if CUSTOM_CLASS_COLORS then
-	for k, v in pairs(CUSTOM_CLASS_COLORS) do
-		classColours[L[k]] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
-	end
-
-	CUSTOM_CLASS_COLORS:RegisterCallback(function()
+do
+	if CUSTOM_CLASS_COLORS then
 		for k, v in pairs(CUSTOM_CLASS_COLORS) do
-			classColours[L[k]] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
+			hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(v.r * 255, v.g * 255, v.b * 255)
 		end
-	end)
-else
-	for k, v in pairs(RAID_CLASS_COLORS) do
-		classColours[L[k]] = ("%02x%02x%02x"):format(v.r*255, v.g*255, v.b*255)
+
+		CUSTOM_CLASS_COLORS:RegisterCallback(function()
+			for k, v in pairs(CUSTOM_CLASS_COLORS) do
+				hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(v.r * 255, v.g * 255, v.b * 255)
+			end
+		end)
+	else
+		for k, v in pairs(RAID_CLASS_COLORS) do
+			hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(v.r * 255, v.g * 255, v.b * 255)
+		end
 	end
 end
 
-
+-- colour functions
 local function random(text) -- copied from Prat-3.0
 	local hash = 17
 
@@ -47,9 +47,7 @@ local function random(text) -- copied from Prat-3.0
 end
 
 local function class(text, c)
-	c = c:upper()
-
-	local hex = classColours[c]
+	local hex = hexColors[c]
 	return "|cff"..hex..text.."|r"
 end
 
