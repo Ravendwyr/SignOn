@@ -4,7 +4,7 @@
 ## Author: Ethan Centaurai
 ## Version: 2.3.11
 ## SavedVariables: SignOnDB
-## OptionalDeps: Ace3
+## OptionalDeps: Ace3, LibAlts-1.0
 
 #@no-lib-strip@
 Lib\LibAlts-1.0\LibStub\LibStub.lua
