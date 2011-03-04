@@ -1,4 +1,4 @@
-Version 2.3.12
+Version 2.3.12a
 - Updated for WoW 4.0.1.
 
 Version 2.3.11
