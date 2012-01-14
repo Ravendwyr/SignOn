@@ -8,22 +8,32 @@ local db
 local hexColors = {}
 
 do
+	local red, green, blue
+
 	if CUSTOM_CLASS_COLORS then
 		for k, v in pairs(CUSTOM_CLASS_COLORS) do
-			hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(v.r * 255, v.g * 255, v.b * 255)
+			red, green, blue = v.r * 255, v.g * 255, v.b * 255
+
+			hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(red, green, blue)
+			hexColors[LOCALIZED_CLASS_NAMES_FEMALE[k]] = ("%02x%02x%02x"):format(red, green, blue)
 		end
 
 		CUSTOM_CLASS_COLORS:RegisterCallback(function()
 			for k, v in pairs(CUSTOM_CLASS_COLORS) do
-				hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(v.r * 255, v.g * 255, v.b * 255)
+				hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(red, green, blue)
+				hexColors[LOCALIZED_CLASS_NAMES_FEMALE[k]] = ("%02x%02x%02x"):format(red, green, blue)
 			end
 		end)
 	else
 		for k, v in pairs(RAID_CLASS_COLORS) do
-			hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(v.r * 255, v.g * 255, v.b * 255)
+			red, green, blue = v.r * 255, v.g * 255, v.b * 255
+
+			hexColors[LOCALIZED_CLASS_NAMES_MALE[k]] = ("%02x%02x%02x"):format(red, green, blue)
+			hexColors[LOCALIZED_CLASS_NAMES_FEMALE[k]] = ("%02x%02x%02x"):format(red, green, blue)
 		end
 	end
 end
+
 
 -- colour functions
 local function random(text) -- copied from Prat-3.0
