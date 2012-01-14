@@ -1,3 +1,6 @@
+Version 2.3.15
+- Fixed an error for non-English clients when a female character logged in or out.
+
 Version 2.3.14
 - Updated for WoW 4.3.0.
 
