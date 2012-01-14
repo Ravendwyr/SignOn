@@ -67,7 +67,13 @@ local function getUserData(playerName)
 		for i=1, GetNumGuildMembers(true) do
 			u.type, name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = "GUILD", GetGuildRosterInfo(i)
 
-			if playerName == name then return u end
+			if playerName == name then
+				--@debug@--
+				if db.debug then print(GetGuildRosterInfo(i)) end
+				--@end-debug@--
+
+				return u
+			end
 		end
 	end
 
@@ -75,7 +81,13 @@ local function getUserData(playerName)
 	for i=1, GetNumFriends() do
 		u.type, name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
 
-		if playerName == name then return u end
+		if playerName == name then
+			--@debug@--
+			if db.debug then print(GetFriendInfo(i)) end
+			--@end-debug@--
+
+			return u
+		end
 	end
 end
 
