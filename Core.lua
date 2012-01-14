@@ -234,8 +234,13 @@ function SignOn:OnEnable()
 	_G["SLASH_SIGNON2"] = "/so"
 
 	--@debug@--
-	_G.SlashCmdList["SIGNONTEST"] = function(msg) db.debug = true signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h has come online.") end
 	_G["SLASH_SIGNONTEST1"] = "/sotest"
+	_G.SlashCmdList["SIGNONTEST"] = function(msg)
+		db.debug = true
+
+		signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h "..L["has come online"]..".")
+		signOn(nil, nil, msg.." "..L["has gone offline"]..".")
+	end
 	--@end-debug@--
 end
 
