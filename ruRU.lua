@@ -8,21 +8,23 @@ L["Format string for when guild members log off."] = "Шаблон сообще�
 L["Format string for when guild members sign on."] = "Шаблон сообщения для случая, когда согильдиец выходит из игрового мира."
 L["Friend Log-off Message"] = "Сообщение выхода из игры друга"
 L["Friend Log-on Message"] = "Сообщение входа в игру друга"
-L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Друг> &name:random &alts:bracket [&level &class:class] вышел:red &note:bracket"
-L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<Друг> &name:random &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
+L["<Friend> &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Друг> &name &alts:bracket [&level &class:class] вышел:red &note:bracket"
+L["<Friend> &name &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<Друг> &name &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
 L["Guild Log-off Message"] = "Сообщение выхода из игры согильдийца"
 L["Guild Log-on Message"] = "Сообщение выхода в игру согильдийца"
-L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Гильдия> &rank &name:random &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
-L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Гильдия> &rank &name:random &alts:bracket [&level &class:class] вышел:red &note:bracket"
+L["<Guild> &rank &name &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Гильдия> &rank &name &alts:bracket [&level &class:class] зашел:green в &zone &note:bracket"
+L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Гильдия> &rank &name &alts:bracket [&level &class:class] вышел:red &note:bracket"
 L["Chat Frame"] = "Chat Frame" -- needs review
 L["Select the Chat Frame the message should appear in."] = "Select the Chat Frame the message should appear in." -- needs review
 L["has come online"] = "входит в игру."
 L["(.-) has gone offline"] = "(.-) выходит из игрового мира."
 L["has gone offline"] = "выходит из игрового мира."
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h входит в игру."
-L["Tutorial"] = [=[Строки могут сождержать контектсные тэги, цветовые флаги и прочие символы.
-Контектсные тэги: &name, &level, &class, &alts, &zone, &rank, и &note.
-Цветовые флаги - :random, :class, :green, :red, :blue, :pink, :cyan, :yellow, и :orange.
-Флаг :random ведёт себя аналогично правилам Prat-3.0 для 'random'.
-Например, &name:class быдут выглядеть как %s.
-Все прочее символы трактуются как часть сообщения.]=] -- Needs review
+L["Tutorial"] = "Strings can contain tags, flags and any other characters.\
+Acceptable tags are &name, &level, &class, &alts, &zone, &rank, and &note.\
+Acceptable colour flags are :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white, and :orange.\
+Acceptable bracket flags are :bracket, :square, and :angle.\
+:random produces a trully random colour every time.\
+:custom is a colour you choose using the swatch below the messages.\
+For example, &name:class:square would become %s.\
+Anything else will be assumed to be part of the message." -- needs review

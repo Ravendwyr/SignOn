@@ -210,10 +210,10 @@ function SignOn:Enable()
 	db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
 		debug = false, chatFrame = 0,
 		custom = { r = 0.6, g = 0.6, b = 0.6 },
-		guildOn = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"],
-		guildOff = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
-		friendOn = L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"],
-		friendOff = L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
+		guildOn = L["<Guild> &rank &name &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"],
+		guildOff = L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
+		friendOn = L["<Friend> &name &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"],
+		friendOff = L["<Friend> &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
 	}}, "Default").profile
 
 	if IsAddOnLoaded("Prat-3.0") then

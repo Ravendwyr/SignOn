@@ -8,23 +8,23 @@ L["Format string for when guild members log off."] = "Formatstring wenn Gildenmi
 L["Format string for when guild members sign on."] = "Formatstring wenn Gildenmitglieder einloggen."
 L["Friend Log-off Message"] = "Auslog-Nachricht für Freunde"
 L["Friend Log-on Message"] = "Einlog-Nachricht für Freunde"
-L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Freund> &name:random &alts:bracket [&level &class:class] ist jetzt:red offline:red &note:bracket"
-L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<Freund> &name:random &alts:bracket [&level &class:class] ist jetzt:green offline:green in &zone &note:bracket"
+L["<Friend> &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Freund> &name &alts:bracket [&level &class:class] ist jetzt:red offline:red &note:bracket"
+L["<Friend> &name &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<Freund> &name &alts:bracket [&level &class:class] ist jetzt:green offline:green in &zone &note:bracket"
 L["Guild Log-off Message"] = "Auslog-Nachricht für die Gilde"
 L["Guild Log-on Message"] = "Einlog-Nachricht für Freunde"
 L["Chat Frame"] = "Chat Frame" -- needs review
 L["Select the Chat Frame the message should appear in."] = "Select the Chat Frame the message should appear in." -- needs review
-L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Gilde> &rank &name:random &alts:bracket [&level &class:class] ist jetzt:green online:green in &zone &note:bracket"
-L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Guild> &rank &name:random &alts:bracket [&level &class:class] ist jetzt:red offline:red &note:bracket"
+L["<Guild> &rank &name &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Gilde> &rank &name &alts:bracket [&level &class:class] ist jetzt:green online:green in &zone &note:bracket"
+L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Guild> &rank &name &alts:bracket [&level &class:class] ist jetzt:red offline:red &note:bracket"
 L["has come online"] = "ist jetzt online"
 L["(.-) has gone offline"] = "(.-) ist jetzt offline"
 L["has gone offline"] = "ist jetzt offline"
 L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h ist jetzt online"
-L["Tutorial"] = [=[Strings können Tags, Marker und beliebige andere Zeichen enthalten.
-Akzeptierte Tags sind &name, &level, &class, &alts, &zone, &rank und &note.
-Akzeptierte Farbmarker sind :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white und :orange.
-Akzeptierte Klammermarker sind :bracket, :square und :angle.
-:random folgt den selben Regeln wie in Prat-3.0s 'random' Spielernamen-Farbeinstellungen.
-:custom ist eine Farbe die unten im Feld ausgewählt werden kann.
-Zum Beispiel: &name:class:square würde zu %s.
-Alles andere wird als Teil der Benachrichtigung angesehen.]=]
+L["Tutorial"] = "Strings can contain tags, flags and any other characters.\
+Acceptable tags are &name, &level, &class, &alts, &zone, &rank, and &note.\
+Acceptable colour flags are :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white, and :orange.\
+Acceptable bracket flags are :bracket, :square, and :angle.\
+:random produces a trully random colour every time.\
+:custom is a colour you choose using the swatch below the messages.\
+For example, &name:class:square would become %s.\
+Anything else will be assumed to be part of the message." -- needs review
