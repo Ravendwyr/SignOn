@@ -101,6 +101,7 @@ local function getUserData(playerName)
 	end
 end
 
+
 local function signOn(_, _, message, arg4, ...)
 	local name, online
 
@@ -174,6 +175,23 @@ local function signOn(_, _, message, arg4, ...)
 	else
 		return false, msg, arg4, ...
 	end
+end
+
+
+local chatFrameChoices = {}
+local function getChatFrameChoices()
+	wipe(chatFrameChoices)
+	chatFrameChoices[0] = DEFAULT
+
+	for i = 1, 10 do
+		local chatFrame = _G["ChatFrame" .. i]
+
+		if chatFrame:IsShown() or chatFrame.isDocked then
+			chatFrameChoices[i] = chatFrame.name
+		end
+	end
+
+	return chatFrameChoices
 end
 
 
