@@ -17,14 +17,12 @@ L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:re
 L["Chat Frame"] = "Chat Frame" -- needs review
 L["Select the Chat Frame the message should appear in."] = "Select the Chat Frame the message should appear in." -- needs review
 L["has come online"] = "vient de se connecter"
-L["(.-) has gone offline"] = "(.-) vient de se déconnecter"
 L["has gone offline"] = "vient de se déconnecter"
-L["|Hplayer:(.-)|h.-|h has come online"] = "|Hplayer:(.-)|h.-|h vient de se connecter"
 L["Tutorial"] = "Strings can contain tags, flags and any other characters.\
 Acceptable tags are &name, &level, &class, &alts, &zone, &rank, and &note.\
 Acceptable colour flags are :random, :custom, :class, :green, :red, :blue, :pink, :cyan, :yellow, :white, and :orange.\
 Acceptable bracket flags are :bracket, :square, and :angle.\
-:random produces a trully random colour every time.\
+:random produces a truly random colour every time.\
 :custom is a colour you choose using the swatch below the messages.\
 For example, &name:class:square would become %s.\
 Anything else will be assumed to be part of the message." -- needs review

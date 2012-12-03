@@ -89,12 +89,11 @@ local function getUserData(playerName)
 	end
 end
 
-
 local function MakeMessageBetter(_, _, message, arg4, ...)
 	local name, online
 
-	if message:find(L["has come online"]) then name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
-	elseif message:find(L["has gone offline"]) then name, online = message:match(L["(.-) has gone offline"]), false
+	if message:find(L["has come online"]) then name, online = message:match("|Hplayer:(.-)|h.-|h "..L["has come online"]), true
+	elseif message:find(L["has gone offline"]) then name, online = message:match("(.-) "..L["has gone offline"]), false
 	else return end
 
 	if not name and arg4 then name = arg4 end -- arg4 is the player's name, supplied by Prat
@@ -166,23 +165,6 @@ local function MakeMessageBetter(_, _, message, arg4, ...)
 end
 
 
-local chatFrameChoices = {}
-local function getChatFrameChoices()
-	wipe(chatFrameChoices)
-	chatFrameChoices[0] = DEFAULT
-
-	for i = 1, 10 do
-		local chatFrame = _G["ChatFrame" .. i]
-
-		if chatFrame:IsShown() or chatFrame.isDocked then
-			chatFrameChoices[i] = chatFrame.name
-		end
-	end
-
-	return chatFrameChoices
-end
-
-
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	if event ~= "CHAT_MSG_SYSTEM" then return end
 
@@ -205,6 +187,22 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	message.Pp = ""
 end
 
+
+local chatFrameChoices = {}
+local function getChatFrameChoices()
+	wipe(chatFrameChoices)
+	chatFrameChoices[0] = DEFAULT
+
+	for i = 1, 10 do
+		local chatFrame = _G["ChatFrame" .. i]
+
+		if chatFrame:IsShown() or chatFrame.isDocked then
+			chatFrameChoices[i] = chatFrame.name
+		end
+	end
+
+	return chatFrameChoices
+end
 
 function SignOn:Enable()
 	db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
