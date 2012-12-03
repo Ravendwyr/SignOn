@@ -2,10 +2,10 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("SignOn", "zhCN")
 if not L then return end
 
-L["Format string for when friends log off"] = "当好友离线时候的字符串格式"
-L["Format string for when friends sign on"] = "当好友上线时候的字符串格式"
-L["Format string for when guild members log off"] = "公会成员离线时候的字符串格式"
-L["Format string for when guild members sign on"] = "公会成员上线时候的字符串格式"
+L["Format string for when friends log off."] = "当好友离线时候的字符串格式"
+L["Format string for when friends sign on."] = "当好友上线时候的字符串格式"
+L["Format string for when guild members log off."] = "公会成员离线时候的字符串格式"
+L["Format string for when guild members sign on."] = "公会成员上线时候的字符串格式"
 L["Friend Log-off Message"] = "好友离线消息"
 L["Friend Log-on Message"] = "好友上线消息"
 L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<好友> [&level]&name:class &alts:bracket已经 离线:red了 &note:bracket"
@@ -14,6 +14,8 @@ L["Guild Log-off Message"] = "公会成员离线消息"
 L["Guild Log-on Message"] = "公会成员上线消息"
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经在&zone 上线:green了(&rank)"
 L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经 离线:red了(&rank)"
+L["Chat Frame"] = "Chat Frame" -- needs review
+L["Select the Chat Frame the message should appear in."] = "Select the Chat Frame the message should appear in." -- needs review
 L["has come online"] = "上线了"
 L["(.-) has gone offline"] = "(.-)下线了"
 L["has gone offline"] = "下线了"

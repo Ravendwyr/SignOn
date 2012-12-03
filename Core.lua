@@ -166,18 +166,25 @@ local function signOn(_, _, message, arg4, ...)
 	if db.debug then print(msg) return true, nil end -- nil for Prat
 	--@end-debug@--
 
-	return false, msg, arg4, ...
+	if db.chatFrame > 0 then
+		local color = ChatTypeInfo["SYSTEM"]
+		_G["ChatFrame" .. db.chatFrame]:AddMessage(msg, color.r, color.g, color.b)
+
+		return true
+	else
+		return false, msg, arg4, ...
+	end
 end
 
 
 function SignOn:OnEnable()
 	self.db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
+		debug = false, chatFrame = 0,
+		custom = { r = 0.6, g = 0.6, b = 0.6 },
 		guildOn = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"],
 		guildOff = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
 		friendOn = L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"],
 		friendOff = L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
-
-		custom = { r = 0.6, g = 0.6, b = 0.6 }, debug = false,
 	}}, "Default")
 
 	db = self.db.profile
@@ -189,7 +196,7 @@ function SignOn:OnEnable()
 	end
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("SignOn", {
-		name = "Sign On", type = "group",
+		name = "SignOn", type = "group",
 		get = function(key) return db[key.arg] end,
 		set = function(key, value) db[key.arg] = value end,
 		args = {
@@ -203,24 +210,30 @@ function SignOn:OnEnable()
 				type = "toggle", order = 2, arg = "debug",
 			},
 			--@end-debug@--
+			chatFrame = {
+				name = L["Chat Frame"],
+				desc = L["Select the Chat Frame the message should appear in."],
+				type = "select", order = 8, arg = "chatFrame",
+				values = getChatFrameChoices,
+			},
 			guildOn = {
 				name = L["Guild Log-on Message"],
-				desc = L["Format string for when guild members sign on"],
+				desc = L["Format string for when guild members sign on."],
 				type = "input", order = 3, arg = "guildOn", width = "full",
 			},
 			guildOff = {
 				name = L["Guild Log-off Message"],
-				desc = L["Format string for when guild members log off"],
+				desc = L["Format string for when guild members log off."],
 				type = "input", order = 4, arg = "guildOff", width = "full",
 			},
 			friendOn = {
 				name = L["Friend Log-on Message"],
-				desc = L["Format string for when friends sign on"],
+				desc = L["Format string for when friends sign on."],
 				type = "input", order = 5, arg = "friendOn", width = "full",
 			},
 			friendOff = {
 				name = L["Friend Log-off Message"],
-				desc = L["Format string for when friends log off"],
+				desc = L["Format string for when friends log off."],
 				type = "input", order = 6, arg = "friendOff", width = "full",
 			},
 			custom = {
@@ -237,9 +250,9 @@ function SignOn:OnEnable()
 		},
 	})
 
-	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "Sign On")
+	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "SignOn")
 
-	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("Sign On") end
+	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("SignOn") end
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
 
@@ -262,7 +275,7 @@ function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	if not msg then return end
 
 	-- nil out all message data except actual content
-	-- we have to do this otherwise the players name will appear twice in the message
+	-- we have to do this otherwise the player's name will appear twice
 	message.MESSAGE = msg
 	message.PLAYER = ""
 	message.PLAYERLINK = ""
