@@ -222,42 +222,30 @@ function SignOn:OnEnable()
 				type = "description", order = 1,
 				name = L["Tutorial"]:format(class("["..UnitName("player").."]", UnitClass("player"))),
 			},
-			--@debug@--
-			debug = {
-				name = "|cffc41e3aDebug|r", width = "full",
-				type = "toggle", order = 2, arg = "debug",
-			},
-			--@end-debug@--
-			chatFrame = {
-				name = L["Chat Frame"],
-				desc = L["Select the Chat Frame the message should appear in."],
-				type = "select", order = 8, arg = "chatFrame",
-				values = getChatFrameChoices,
-			},
 			guildOn = {
 				name = L["Guild Log-on Message"],
 				desc = L["Format string for when guild members sign on."],
-				type = "input", order = 3, arg = "guildOn", width = "full",
+				type = "input", order = 2, arg = "guildOn", width = "full",
 			},
 			guildOff = {
 				name = L["Guild Log-off Message"],
 				desc = L["Format string for when guild members log off."],
-				type = "input", order = 4, arg = "guildOff", width = "full",
+				type = "input", order = 3, arg = "guildOff", width = "full",
 			},
 			friendOn = {
 				name = L["Friend Log-on Message"],
 				desc = L["Format string for when friends sign on."],
-				type = "input", order = 5, arg = "friendOn", width = "full",
+				type = "input", order = 4, arg = "friendOn", width = "full",
 			},
 			friendOff = {
 				name = L["Friend Log-off Message"],
 				desc = L["Format string for when friends log off."],
-				type = "input", order = 6, arg = "friendOff", width = "full",
+				type = "input", order = 5, arg = "friendOff", width = "full",
 			},
 			custom = {
 				name = "Custom Colour",
 				desc = "Set the colour for the :custom colour flag.",
-				type = "color", order = 7, arg = "custom", hasAlpha = false,
+				type = "color", order = 6, arg = "custom", hasAlpha = false,
 				get = function()
 					return db.custom.r, db.custom.g, db.custom.b
 				end,
@@ -265,6 +253,18 @@ function SignOn:OnEnable()
 					db.custom.r, db.custom.g, db.custom.b = r, g, b
 				end,
 			},
+			chatFrame = {
+				name = L["Chat Frame"],
+				desc = L["Select the Chat Frame the message should appear in."],
+				type = "select", order = 7, arg = "chatFrame",
+				values = getChatFrameChoices,
+			},
+			--@debug@--
+			debug = {
+				name = "|cffc41e3aDebug|r",
+				type = "toggle", order = 8, arg = "debug",
+			},
+			--@end-debug@--
 		},
 	})
 
