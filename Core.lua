@@ -36,22 +36,10 @@ end
 
 
 -- colour functions
-local function random(text) -- copied from Prat-3.0
-	local hash = 17
-
-	for i=1, text:len() do
-		hash = hash * 37 * text:byte(i)
-	end
-
-	local r = math.floor(math.fmod(hash / 97, 255))
-	local g = math.floor(math.fmod(hash / 17, 255))
-	local b = math.floor(math.fmod(hash / 227, 255))
-
-	if ((r * 299 + g * 587 + b * 114) / 1000) < 105 then
-		r = math.abs(r - 255)
-		g = math.abs(g - 255)
-		b = math.abs(b - 255)
-	end
+local function random(text)
+	local r = math.random(0, 255)
+	local g = math.random(0, 255)
+	local b = math.random(0, 255)
 
 	return ("|cff%02x%02x%02x%s|r"):format(r, g, b, text)
 end
