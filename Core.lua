@@ -1,12 +1,12 @@
 
-local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
+local _, SignOn = ...
 
 local L = LibStub("AceLocale-3.0"):GetLocale("SignOn")
 local AltDB = LibStub("LibAlts-1.0")
 local db
 
-local hexColors = {}
 
+local hexColors = {}
 do
 	local red, green, blue
 
@@ -102,7 +102,7 @@ local function getUserData(playerName)
 end
 
 
-local function signOn(_, _, message, arg4, ...)
+local function MakeMessageBetter(_, _, message, arg4, ...)
 	local name, online
 
 	if message:find(L["has come online"]) then name, online = message:match(L["|Hplayer:(.-)|h.-|h has come online"]), true
@@ -195,22 +195,43 @@ local function getChatFrameChoices()
 end
 
 
-function SignOn:OnEnable()
-	self.db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
+function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
+	if event ~= "CHAT_MSG_SYSTEM" then return end
+
+	local _, msg = MakeMessageBetter(nil, nil, message.MESSAGE, message.PLAYER)
+	if not msg then return end
+
+	-- nil out all message data except actual content
+	-- we have to do this otherwise the player's name will appear twice
+	message.MESSAGE = msg
+	message.PLAYER = ""
+	message.PLAYERLINK = ""
+	message.PLAYERLINKDATA = ""
+	message.PLAYERLEVEL = ""
+	message.PREPLAYERDELIM = ""
+	message.ALTNAMES = ""
+	message.lL = ""
+	message.LL = ""
+	message.Ll = ""
+	message.pP = ""
+	message.Pp = ""
+end
+
+
+function SignOn:Enable()
+	db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
 		debug = false, chatFrame = 0,
 		custom = { r = 0.6, g = 0.6, b = 0.6 },
 		guildOn = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"],
 		guildOff = L["<Guild> &rank &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
 		friendOn = L["<Friend> &name:random &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"],
 		friendOff = L["<Friend> &name:random &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"],
-	}}, "Default")
-
-	db = self.db.profile
+	}}, "Default").profile
 
 	if IsAddOnLoaded("Prat-3.0") then
 		Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
 	else
-		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", signOn)
+		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", MakeMessageBetter)
 	end
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("SignOn", {
@@ -282,31 +303,11 @@ function SignOn:OnEnable()
 	_G.SlashCmdList["SIGNONTEST"] = function(msg)
 		db.debug = true
 
-		signOn(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h "..L["has come online"]..".")
-		signOn(nil, nil, msg.." "..L["has gone offline"]..".")
+		MakeMessageBetter(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h "..L["has come online"]..".")
+		MakeMessageBetter(nil, nil, msg.." "..L["has gone offline"]..".")
 	end
 	--@end-debug@--
 end
 
 
-function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
-	if event ~= "CHAT_MSG_SYSTEM" then return end
-
-	local _, msg = signOn(nil, nil, message.MESSAGE, message.PLAYER)
-	if not msg then return end
-
-	-- nil out all message data except actual content
-	-- we have to do this otherwise the player's name will appear twice
-	message.MESSAGE = msg
-	message.PLAYER = ""
-	message.PLAYERLINK = ""
-	message.PLAYERLINKDATA = ""
-	message.PLAYERLEVEL = ""
-	message.PREPLAYERDELIM = ""
-	message.ALTNAMES = ""
-	message.lL = ""
-	message.LL = ""
-	message.Ll = ""
-	message.pP = ""
-	message.Pp = ""
-end
+SignOn:Enable()
