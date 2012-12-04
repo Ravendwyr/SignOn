@@ -16,6 +16,8 @@ L["<Guild> &rank &name &alts:bracket [&level &class:class] has come:green online
 L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<公会> [&level]&name:class &alts:bracket已经 离线:red了(&rank)"
 L["Chat Frame"] = "Chat Frame" -- needs review
 L["Select the Chat Frame the message should appear in."] = "Select the Chat Frame the message should appear in." -- needs review
+L["Custom Colour"] = "Custom Colour" -- needs review
+L["Set the colour for the :custom colour flag."] = "Set the colour for the :custom colour flag." -- needs review
 L["has come online"] = "上线了"
 L["has gone offline"] = "下线了"
 L["Tutorial"] = "Strings can contain tags, flags and any other characters.\

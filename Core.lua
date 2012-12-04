@@ -250,8 +250,8 @@ function SignOn:OnEnable()
 				type = "input", order = 5, arg = "friendOff", width = "full",
 			},
 			custom = {
-				name = "Custom Colour",
-				desc = "Set the colour for the :custom colour flag.",
+				name = L["Custom Colour"],
+				desc = L["Set the colour for the :custom colour flag."],
 				type = "color", order = 6, arg = "custom", hasAlpha = false,
 				get = function()
 					return db.custom.r, db.custom.g, db.custom.b
