@@ -19,11 +19,11 @@ Lib\LibAlts-1.0\LibAlts-1.0.lua
 Lib\tekKonfig\tekKonfigAboutPanel.lua
 #@end-no-lib-strip@
 
-enUS.lua
-deDE.lua
-frFR.lua
-ruRU.lua
-zhCN.lua
-zhTW.lua
+Locale\enUS.lua
+Locale\deDE.lua
+Locale\frFR.lua
+Locale\ruRU.lua
+Locale\zhCN.lua
+Locale\zhTW.lua
 
 Core.lua
