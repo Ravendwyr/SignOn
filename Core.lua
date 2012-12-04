@@ -1,5 +1,5 @@
 
-local _, SignOn = ...
+local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
 
 local L = LibStub("AceLocale-3.0"):GetLocale("SignOn")
 local AltDB = LibStub("LibAlts-1.0")
@@ -204,7 +204,7 @@ local function getChatFrameChoices()
 	return chatFrameChoices
 end
 
-function SignOn:Enable()
+function SignOn:OnEnable()
 	db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
 		debug = false, chatFrame = 0,
 		custom = { r = 0.6, g = 0.6, b = 0.6 },
@@ -294,6 +294,3 @@ function SignOn:Enable()
 	end
 	--@end-debug@--
 end
-
-
-SignOn:Enable()
