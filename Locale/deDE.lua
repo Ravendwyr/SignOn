@@ -12,12 +12,12 @@ L["<Friend> &name &alts:bracket [&level &class:class] has logged:red off:red &no
 L["<Friend> &name &alts:bracket [&level &class:class] has signed:green on:green in &zone &note:bracket"] = "<Freund> &name &alts:bracket [&level &class:class] ist jetzt:green offline:green in &zone &note:bracket"
 L["Guild Log-off Message"] = "Auslog-Nachricht für die Gilde"
 L["Guild Log-on Message"] = "Einlog-Nachricht für Freunde"
+L["<Guild> &rank &name &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Gilde> &rank &name &alts:bracket [&level &class:class] ist jetzt:green online:green in &zone &note:bracket"
+L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Guild> &rank &name &alts:bracket [&level &class:class] ist jetzt:red offline:red &note:bracket"
 L["Chat Frame"] = "Chat Frame" -- needs review
 L["Select the Chat Frame the message should appear in."] = "Select the Chat Frame the message should appear in." -- needs review
 L["Custom Colour"] = "Custom Colour" -- needs review
 L["Set the colour for the :custom colour flag."] = "Set the colour for the :custom colour flag." -- needs review
-L["<Guild> &rank &name &alts:bracket [&level &class:class] has come:green online:green in &zone &note:bracket"] = "<Gilde> &rank &name &alts:bracket [&level &class:class] ist jetzt:green online:green in &zone &note:bracket"
-L["<Guild> &rank &name &alts:bracket [&level &class:class] has logged:red off:red &note:bracket"] = "<Guild> &rank &name &alts:bracket [&level &class:class] ist jetzt:red offline:red &note:bracket"
 L["has come online"] = "ist jetzt online"
 L["has gone offline"] = "ist jetzt offline"
 L["Tutorial"] = "Strings can contain tags, flags and any other characters.\
