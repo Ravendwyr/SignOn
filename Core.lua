@@ -1,5 +1,5 @@
 
-local SignOn = LibStub("AceAddon-3.0"):NewAddon("SignOn")
+local _, SignOn = ...
 
 local L = LibStub("AceLocale-3.0"):GetLocale("SignOn")
 local AltDB = LibStub("LibAlts-1.0")
@@ -294,3 +294,6 @@ function SignOn:OnEnable()
 	end
 	--@end-debug@--
 end
+
+
+LibStub("AceAddon-3.0"):NewAddon(SignOn, "SignOn")
