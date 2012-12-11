@@ -36,7 +36,7 @@ end
 
 
 -- colour functions
-local function random(text)
+local function RandomColour(text)
 	local r = math.random(0, 255)
 	local g = math.random(0, 255)
 	local b = math.random(0, 255)
@@ -44,14 +44,14 @@ local function random(text)
 	return ("|cff%02x%02x%02x%s|r"):format(r, g, b, text)
 end
 
-local function class(text, c)
+local function ClassColour(text, c)
 	local hex = hexColors[c]
 	return "|cff"..hex..text.."|r"
 end
 
 
 -- core functions
-local function getUserData(playerName)
+local function GetUserData(playerName)
 	local u, name = {}
 
 	-- check if the player is an alt or a main
@@ -89,7 +89,7 @@ local function getUserData(playerName)
 	end
 end
 
-local function MakeMessageBetter(_, _, message, arg4, ...)
+local function EnhanceMessage(_, _, message, arg4, ...)
 	local name, online
 
 	if message:find(L["has come online"]) then name, online = message:match("|Hplayer:(.-)|h.-|h "..L["has come online"]), true
@@ -101,7 +101,7 @@ local function MakeMessageBetter(_, _, message, arg4, ...)
 
 	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out Prat colour codes
 
-	local data = getUserData(name)
+	local data = GetUserData(name)
 	if not data then return end -- couldn't get information, bail out
 
 	local msg
@@ -119,9 +119,9 @@ local function MakeMessageBetter(_, _, message, arg4, ...)
 	--@end-debug@--
 
 	-- add in colours
-	msg = msg:gsub("([^%s]+):class", class("%1", data.class)) -- %1 is the text minus the flags
+	msg = msg:gsub("([^%s]+):class", ClassColour("%1", data.class)) -- %1 is the text minus the flags
 	msg = msg:gsub("([^%s]+):custom", ("|cff%02x%02x%02x%s|r"):format(db.custom.r*255, db.custom.g*255, db.custom.b*255, "%1"))
-	msg = msg:gsub("([^%s]+):random", random)
+	msg = msg:gsub("([^%s]+):random", RandomColour)
 	msg = msg:gsub("([^%s]+):green", "|cff00ff00%1|r")
 	msg = msg:gsub("([^%s]+):red", "|cffff0000%1|r")
 	msg = msg:gsub("([^%s]+):blue", "|cff0000ff%1|r")
@@ -168,7 +168,7 @@ end
 function SignOn:Prat_PreAddMessage(_, message, frame, event, t, r, g, b)
 	if event ~= "CHAT_MSG_SYSTEM" then return end
 
-	local _, msg = MakeMessageBetter(nil, nil, message.MESSAGE, message.PLAYER)
+	local _, msg = EnhanceMessage(nil, nil, message.MESSAGE, message.PLAYER)
 	if not msg then return end
 
 	-- nil out all message data except actual content
@@ -189,7 +189,7 @@ end
 
 
 local chatFrameChoices = {}
-local function getChatFrameChoices()
+local function GetChatFrameChoices()
 	wipe(chatFrameChoices)
 	chatFrameChoices[0] = DEFAULT
 
@@ -217,7 +217,7 @@ function SignOn:OnEnable()
 	if IsAddOnLoaded("Prat-3.0") then
 		Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
 	else
-		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", MakeMessageBetter)
+		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", EnhanceMessage)
 	end
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("SignOn", {
@@ -227,7 +227,7 @@ function SignOn:OnEnable()
 		args = {
 			desc = {
 				type = "description", order = 1,
-				name = L["Tutorial"]:format(class("["..UnitName("player").."]", UnitClass("player"))),
+				name = L["Tutorial"]:format( ClassColour("["..UnitName("player").."]", UnitClass("player")) ),
 			},
 			guildOn = {
 				name = L["Guild Log-on Message"],
@@ -264,7 +264,7 @@ function SignOn:OnEnable()
 				name = L["Chat Frame"],
 				desc = L["Select the Chat Frame the message should appear in."],
 				type = "select", order = 7, arg = "chatFrame",
-				values = getChatFrameChoices,
+				values = GetChatFrameChoices,
 			},
 			--@debug@--
 			debug = {
@@ -289,8 +289,8 @@ function SignOn:OnEnable()
 	_G.SlashCmdList["SIGNONTEST"] = function(msg)
 		db.debug = true
 
-		MakeMessageBetter(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h "..L["has come online"]..".")
-		MakeMessageBetter(nil, nil, msg.." "..L["has gone offline"]..".")
+		EnhanceMessage(nil, nil, "|Hplayer:"..msg.."|h"..msg.."|h "..L["has come online"]..".")
+		EnhanceMessage(nil, nil, msg.." "..L["has gone offline"]..".")
 	end
 	--@end-debug@--
 end
