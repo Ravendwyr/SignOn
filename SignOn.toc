@@ -4,12 +4,13 @@
 ## Author: Ethan Centaurai
 ## Version: @project-version@
 ## SavedVariables: SignOnDB
-## OptionalDeps: Ace3, LibAlts-1.0, Prat-3.0
+## OptionalDeps: LibStub, LibChatAnims, Ace3, LibAlts-1.0, Prat-3.0
 ## X-Credits: ChiperSoft
 
 #@no-lib-strip@
 Lib\LibAlts-1.0\LibStub\LibStub.lua
 Lib\LibAlts-1.0\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Lib\LibChatAnims\LibChatAnims.lua
 Lib\AceAddon-3.0\AceAddon-3.0.lua
 Lib\AceDB-3.0\AceDB-3.0.lua
 Lib\AceGUI-3.0\AceGUI-3.0.xml
