@@ -102,7 +102,7 @@ local function EnhanceMessage(_, _, message, arg4, ...)
 	elseif message:find(L["has gone offline"]) then name, online = message:match("(.-) "..L["has gone offline"]), false
 	else return end
 
-	if not name and arg4 then name = arg4 end -- arg4 is the player's name, supplied by Prat
+	if not name and arg4 then name = arg4 end -- arg4 is the player's name, supplied by SignOn:Prat_PreAddMessage() below
 	if not name then return end -- couldn't get a name, bail out
 
 	name = name:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") -- strip out Prat colour codes
