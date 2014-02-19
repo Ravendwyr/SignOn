@@ -3,6 +3,7 @@ local _, SignOn = ...
 
 local L = LibStub("AceLocale-3.0"):GetLocale("SignOn")
 local AltDB = LibStub("LibAlts-1.0")
+local playerRealm
 local db
 
 
@@ -62,6 +63,11 @@ local function GetUserData(playerName)
 
 	-- search guild roster
 	if IsInGuild() then
+		-- to fix a bug caused by Patch 5.4.7
+		if not playerName:find("-") then
+			playerName = playerName.."-"..playerRealm
+		end
+
 		for i=1, GetNumGuildMembers(true) do
 			u.type, name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = "GUILD", GetGuildRosterInfo(i)
 
@@ -205,6 +211,9 @@ local function GetChatFrameChoices()
 end
 
 function SignOn:OnEnable()
+	-- GetRealmName() returns blank if called too early, so we delay it
+	playerRealm = GetRealmName():gsub(" ", "")
+
 	db = LibStub("AceDB-3.0"):New("SignOnDB", { profile = {
 		debug = false, chatFrame = 0,
 		custom = { r = 0.6, g = 0.6, b = 0.6 },
