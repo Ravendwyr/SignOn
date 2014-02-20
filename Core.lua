@@ -286,9 +286,6 @@ function SignOn:OnEnable()
 
 	LibStub("AceConfigDialog-3.0"):AddToBlizOptions("SignOn", "SignOn")
 
-	local AboutPanel = LibStub("tekKonfig-AboutPanel", true)
-	if AboutPanel then AboutPanel.new("SignOn", "SignOn") end
-
 	_G.SlashCmdList["SIGNON"] = function() InterfaceOptionsFrame_OpenToCategory("SignOn") end
 	_G["SLASH_SIGNON1"] = "/signon"
 	_G["SLASH_SIGNON2"] = "/so"
