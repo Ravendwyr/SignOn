@@ -17,7 +17,6 @@ Lib\AceGUI-3.0\AceGUI-3.0.xml
 Lib\AceConfig-3.0\AceConfig-3.0.xml
 Lib\AceLocale-3.0\AceLocale-3.0.lua
 Lib\LibAlts-1.0\LibAlts-1.0.lua
-Lib\tekKonfig\tekKonfigAboutPanel.lua
 #@end-no-lib-strip@
 
 Locale\enUS.lua
