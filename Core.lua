@@ -61,17 +61,22 @@ local function GetUserData(playerName)
 
 	u.alts = main or alts or ""
 
-	-- search guild roster
 	if IsInGuild() then
-		-- to fix a bug caused by Patch 5.4.7
+		-- the guild roster always uses NAME-REALM, even if REALM is the same as the player's realm
+		-- the system logon/logoff messages do not contain REALM if its the same as the player's realm
+		-- therefore, unlike most chat filter addons, SignOn needs to disambiguate to function correctly
+		local searchForName
+
 		if not playerName:find("-") then
-			playerName = playerName.."-"..playerRealm
+			searchForName = playerName.."-"..playerRealm
+		else
+			searchForName = playerName
 		end
 
 		for i=1, GetNumGuildMembers(true) do
 			u.type, name, u.rank, _, u.level, u.class, u.zone, u.note, _, _, _ = "GUILD", GetGuildRosterInfo(i)
 
-			if playerName == name then
+			if searchForName == name then
 				--@debug@--
 				if db.debug then print(GetGuildRosterInfo(i)) end
 				--@end-debug@--
@@ -81,8 +86,8 @@ local function GetUserData(playerName)
 		end
 	end
 
-	-- search friends list
 	for i=1, GetNumFriends() do
+		-- SignOn does not yet need to disambiguate to parse the friends list
 		u.type, name, u.level, u.class, u.zone, _, _, u.note = "FRIEND", GetFriendInfo(i)
 
 		if playerName == name then
